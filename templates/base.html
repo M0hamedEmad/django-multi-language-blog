@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <!-- Render All Element Normaly -->
+  <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/all.min.css' %}">
+  <!-- Main Template Css File -->
+  <link rel="stylesheet" href="{% static 'css/main.css' %}">
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;700;900&family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Start Header -->
+    <header>
+      <div class="container">
+        <div class="logo"><a href="#">VersAlle</a></div>
+        <nav>
+          <ul>
+            <li class="active" ><a href="#">HOME PAGE</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Blog Single</a></li>
+            <li><a href="#">Portfolio</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </nav>
+        <i class="fas fa-search"></i>
+      </div>
+    </header>
+    <!-- End Header -->
+    <section class="content">
+      <div class="container">
+        <div class="main">
+            <div class="content-top">
+              <form action="" method="get">
+                <input type="search" name="search" id="" placeholder="Search...">
+                <input type="submit" value="Search">
+              </form>
+              <div class="social-icon">
+                <a href=""><i class="fab fa-facebook"></i></a>
+                <a href><i class="fab fa-twitter"></i></a>
+                <a href=""><i class="fab fa-instagram"></i></a>
+              </div>
+            </div>
+            <div class="content-inner">
+              <div class="col">
+                {% block content %}
+                {% endblock content %}
+              </div>
+              <aside>
+                <div class="featured">
+                  <h3>Featured</h3>
+                  <article>
+                    <img src="http://demo.alx.media/instorm/wp-content/uploads/sites/38/2019/07/StockSnap_13LKG0AGI0-950x534.jpg" alt="" srcset="">
+                    <div class="article-content">
+                      <h2><a href="">Combining Design And Psychology To Change Behavior</a></h2>
+                      <ul>
+                        <li>
+                          <a href="#">Geral</a>
+                          <a href="#">Mixed</a>
+                        </li>
+                        <li class="date">
+                          <i class="far fa-calendar"></i>
+                          July 7, 2019
+                        </li>
+                      </ul>
+                    </div>
+                  </article>
+                  <article>
+                    <img src="http://demo.alx.media/instorm/wp-content/uploads/sites/38/2019/07/StockSnap_13LKG0AGI0-950x534.jpg" alt="" srcset="">
+                    <div class="article-content">
+                      <h2><a href="">Combining Design And Psychology To Change Behavior</a></h2>
+                      <ul>
+                        <li>
+                          <a href="#">Geral</a>
+                          <a href="#">Mixed</a>
+                        </li>
+                        <li class="date">
+                          <i class="far fa-calendar"></i>
+                          July 7, 2019
+                        </li>
+                      </ul>
+                    </div>
+                  </article>
+                  <article>
+                    <img src="http://demo.alx.media/instorm/wp-content/uploads/sites/38/2019/07/StockSnap_13LKG0AGI0-950x534.jpg" alt="" srcset="">
+                    <div class="article-content">
+                      <h2><a href="">Combining Design And Psychology To Change Behavior</a></h2>
+                      <ul>
+                        <li>
+                          <a href="#">Geral</a>
+                          <a href="#">Mixed</a>
+                        </li>
+                        <li class="date">
+                          <i class="far fa-calendar"></i>
+                          July 7, 2019
+                        </li>
+                      </ul>
+                    </div>
+                  </article>                                    
+                </div>
+              </aside>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Start Footer -->
+    <footer>
+      Copyright &copy;2021 - Blog All Rights
+        <div class="social-icon">
+          <a href=""><i class="fab fa-facebook"></i></a>
+          <a href><i class="fab fa-twitter"></i></a>
+          <a href=""><i class="fab fa-instagram"></i></a>
+        </div>
+    </footer>
+    <!-- End Footer -->
+</body>
+</html>

@@ -1,2 +1,31 @@
-<h1>Posts</h1>
-{{posts}}
+{% extends 'base.html' %}
+{% block content %}
+<div class="articles">
+  {% for post in posts %}
+  <article>
+    <div class="image">
+        <a href="{% url 'post:post' post.slug %}"><img src="{{ post.image.url }}" alt="Image Post"></a>
+    </div>
+    <div class="article-content">
+      <h2><a href="{% url 'post:post' post.slug %}">{{post.title}}</a></h2>
+      <ul>
+      <li class="category">
+        {% for category in post.categories.all %}  
+          <a href="#">{{category}}</a>
+        {% endfor %}
+      </li>
+      <li class="date">
+          <i class="far fa-calendar"></i>
+          {{post.published_at|date:"M d, Y"}}
+      </li>
+      </ul>
+      <p>
+        {{post.content|truncatewords:"30"}}
+      </p>
+    </div>
+  </article>
+  {% empty %}
+  <h2>No Posts Yet</h2>
+  {% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="post">
+	<article>
+  <div class="post-header">
+		<h1>{{post.title}}</h1>
+		<ul>
+			<li class="category">
+				{% for category in post.categories.all %}  
+					<a href="#">{{category}}</a>
+				{% endfor %}
+			</li>
+			<li class="date">
+					<i class="far fa-calendar"></i>
+					{{post.published_at|date:"M d, Y"}}
+			</li>
+			<li class="user-icon">
+					<i class="far fa-user"></i>
+					{{post.author}}
+			</li>		
+		</ul>
+	</div>
+  <img class='post-image' src="{{ post.image.url }}" alt="Image Post">
+	<p>
+		{{post.content}}
+	</p>
+</article>
+<div class="related-posts">
+	<h2>Related Posts</h2>
+	<div class="posts">
+		{% for related_post in related_posts %}
+			<article>
+				<a href="{% url 'post:home' %}">
+					<img src="{{ related_post.image.url }}" alt="Image Post">
+					<h3>{{related_post.title}}</h3>
+				</a>
+			</article>
+		{% empty %}
+			No related posts
+		{% endfor %}
+	</div>
+</div>
+</div>
+{% endblock content %}

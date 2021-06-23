@@ -7,11 +7,12 @@ from PIL import Image
 class Category(models.Model):
     name = models.CharField(max_length=50)
     
+    class Meta:
+        verbose_name_plural = 'categories'
+        
     def __str__(self):
         return self.name
     
-    class Meta:
-        verbose_name_plural = 'categories'
 
 def upload_image(instance, image_name):
     """ Make a path to the post image and change the name of the image to a post id
@@ -32,12 +33,16 @@ class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=4000)
-    categories = models.ManyToManyField(Category)
-    image = models.ImageField(default='post_default_image.jpg', upload_to=upload_image, blank=True, null=True)
-    slug = models.SlugField(null=True, blank=True, unique=True)
-    action = models.BooleanField(default=True, choices=active_field_choices)
+    categories = models.ManyToManyField(Category, blank=True)
+    image = models.ImageField(default='post_images/default.jpg', upload_to=upload_image, blank=True, null=True)
+    slug = models.SlugField(null=True, blank=True, unique=True, max_length=100)
+    active = models.BooleanField(default=True, choices=active_field_choices)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    published_at = models.DateTimeField(default=now)
+    
+    class Meta:
+        ordering = ('-published_at', )
     
     def __str__(self):
         return self.title

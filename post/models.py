@@ -37,6 +37,7 @@ class Post(models.Model):
     image = models.ImageField(default='post_images/default.jpg', upload_to=upload_image, blank=True, null=True)
     slug = models.SlugField(null=True, blank=True, unique=True, max_length=100)
     active = models.BooleanField(default=True, choices=active_field_choices)
+    views_count = models.IntegerField(null=True, blank=True, default=0, editable=False)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
     published_at = models.DateTimeField(default=now)

@@ -20,6 +20,17 @@ class PostDetail(DetailView):
     template_name = 'post/post.html'
     context_object_name = 'post'
     
+    def get(self, request, *args, **kwargs):
+        post = self.get_object()
+        post.views_count += 1
+        post.save()
+        return super().get(request,*args, **kwargs)
+    
+    def get_queryset(self):
+        # render posts that active = true and published_at before now
+        queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
+        return queryset
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         

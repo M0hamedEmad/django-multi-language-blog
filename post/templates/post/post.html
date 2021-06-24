@@ -3,7 +3,10 @@
 <div class="post">
 	<article>
   <div class="post-header">
-		<h1>{{post.title}}</h1>
+		<div class="header">
+			<h1>{{post.title}}</h1>
+			<p>{{post.views_count}} views</p>
+		</div>
 		<ul>
 			<li class="category">
 				{% for category in post.categories.all %}  
@@ -15,8 +18,8 @@
 					{{post.published_at|date:"M d, Y"}}
 			</li>
 			<li class="user-icon">
-					<i class="far fa-user"></i>
-					{{post.author}}
+			  <i class="far fa-user"></i>
+			  {{post.author}}
 			</li>		
 		</ul>
 	</div>

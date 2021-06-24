@@ -301,14 +301,22 @@ g {
 .content .content-inner .post .post-header {
   padding-left: 10px;
   padding-right: 10px;
-  max-width: 750px;
+}
+.content .content-inner .post .post-header .header {
+  display: flex;
+  align-items: center;
+}
+.content .content-inner .post .post-header .header p {
+  font-size: 15px;
+  margin-right: -2%;
+  color: #797979;
 }
 .content .content-inner .post h1 {
   font-size: 45px;
   font-weight: normal;
   color: #333;
   line-height: 1.2;
-  margin-top: 10px
+  flex-basis: 90%;
 }
 .content .content-inner .post ul {
   margin-bottom: 50px;
@@ -318,6 +326,7 @@ g {
 }
 .content .content-inner .post img.post-image {
   width: 96%;
+  max-height: 600px;
   margin-left:2%;
   border-radius: 20px;
   -webkit-border-radius: 20px;

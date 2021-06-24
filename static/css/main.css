@@ -377,6 +377,46 @@ g {
   height: 140px;
 }
 /* End Content */
+/* Start Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  transform: translateX(10%);
+  margin: 75px auto 5px;
+}
+.pagination p {
+  color: #777;
+}
+.pagination i {
+  margin: 0px 13px;
+  
+}
+.pagination ul {
+
+}
+.pagination li {
+  display: inline-block;
+  margin: 0px 2px;  
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  border-radius: 50%;  
+}
+.pagination li.active,
+.pagination li:hover:not(.points) {
+  background-color: #444;
+  text-align: center;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
+.pagination li.active a,
+.pagination li:hover + a {
+  color: white;
+}
+/* End Pagination */
 /* Start Footer */
 footer {
   height: 200px;

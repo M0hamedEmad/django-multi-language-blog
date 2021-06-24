@@ -43,5 +43,12 @@
 		{% endfor %}
 	</div>
 </div>
+<div class="comment">
+	<form action="" method="POST">
+		{% csrf_token %}
+		{{comment_form}}
+		<input type="submit" value="Post Comment">
+	</form>
+</div>
 </div>
 {% endblock content %}

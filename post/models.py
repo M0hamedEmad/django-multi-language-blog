@@ -25,11 +25,11 @@ def upload_image(instance, image_name):
     
 
 
+active_field_choices = [
+(True, 'Active'),
+(False, 'Inactive')
+]
 class Post(models.Model):
-    active_field_choices = [
-    (True, 'Active'),
-    (False, 'Inactive')
-    ]
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=4000)
@@ -73,11 +73,12 @@ class Post(models.Model):
             
         
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     content = models.TextField(max_length=300)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+    actuve = models.BooleanField(default=True, choices=active_field_choices)
     
     def __str__(self):
         return self.content

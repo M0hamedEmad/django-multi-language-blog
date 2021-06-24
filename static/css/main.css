@@ -420,6 +420,41 @@ g {
   color: white;
 }
 /* End Pagination */
+/* Start Comment */
+.comment form {
+  max-width: 700px;
+  width: 100%;
+  margin: 80px auto 0px ;
+  background: #fafafa;
+  padding: 30px;
+  border-radius: 11px;
+  -webkit-border-radius: 11px;
+  -moz-border-radius: 11px;
+  -ms-border-radius: 11px;
+  -o-border-radius: 11px;
+}
+.comment form textarea {
+  height: 101px;
+  border: 1px solid #8787874a;
+  padding: 10px;
+  width: 100%;
+  outline: none;
+}
+.comment form input[type='submit'] {
+  font-size: 14px;
+  display: block;
+  padding: 10px 14px;
+  background: #333;
+  color: white;
+  border: none;
+  margin-top: 5px;
+  border-radius: 8px;
+  cursor: pointer
+}
+.comment form input[type='submit']:hover {
+  background-color: #444;
+}
+/* End Comment */
 /* Start Footer */
 footer {
   height: 200px;

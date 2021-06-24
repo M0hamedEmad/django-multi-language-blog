@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import FormMixin
 from django.utils.timezone import now
 from django.db.models import Q
-from .models import Category, Post
+from .models import Category, Post, Comment
+from .forms import CommentForm
 import random
 
 class PostList(ListView):
@@ -32,10 +34,11 @@ class PostList(ListView):
         return queryset
     
     
-class PostDetail(DetailView):
+class PostDetail(FormMixin, DetailView):
     model = Post
     template_name = 'post/post.html'
     context_object_name = 'post'
+    form_class = CommentForm
     
     def get(self, request, *args, **kwargs):
         """ 
@@ -47,6 +50,24 @@ class PostDetail(DetailView):
         post.save()
         return super().get(request,*args, **kwargs)
     
+    def post(self, request, *args, **kwargs):
+        self.obj = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+    def form_valid(self, form):
+        form_2 = form.save(commit=False)
+        form_2.user = self.request.user
+        form_2.post = self.get_object()
+        form_2.save()
+        return super().form_valid(form)        
+    
+    def get_success_url(self):
+        return reverse('post:post',  kwargs={'slug': self.get_object().slug})
+        
     def get_queryset(self):
         # render posts that active = true and published_at before now
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
@@ -68,4 +89,9 @@ class PostDetail(DetailView):
         
         context['related_posts'] = related_posts
         
+        # comments
+        context['comment_form'] = CommentForm
+        
         return context
+    
+    

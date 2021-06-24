@@ -78,7 +78,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-    actuve = models.BooleanField(default=True, choices=active_field_choices)
+    active = models.BooleanField(default=True, choices=active_field_choices)
     
     def __str__(self):
         return self.content

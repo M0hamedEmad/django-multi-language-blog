@@ -90,6 +90,9 @@ class PostDetail(FormMixin, DetailView):
         context['related_posts'] = related_posts
         
         # comments
+        comments = Comment.objects.filter( Q(post=self.get_object()) & Q(active=True) )
+        context['comments'] = comments
+        
         context['comment_form'] = CommentForm
         
         return context

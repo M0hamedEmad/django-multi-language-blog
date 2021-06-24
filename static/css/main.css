@@ -334,7 +334,7 @@ g {
   -ms-border-radius: 20px;
   -o-border-radius: 20px;
 }
-.content .content-inner .post p {
+.content article .content-inner .post p {
   max-width: 760px;
   text-align: justify;
   color: #333;
@@ -421,6 +421,16 @@ g {
 }
 /* End Pagination */
 /* Start Comment */
+.comment {
+  margin-top: 80px;
+}
+.comment h3.comments-header {
+  margin-bottom: 30px;
+  font-size: 30px;
+  font-weight: normal;
+  border-bottom: 1px solid #aaa;
+  padding: 0px 0px 20px;
+}
 .comment form {
   max-width: 700px;
   width: 100%;
@@ -453,6 +463,40 @@ g {
 }
 .comment form input[type='submit']:hover {
   background-color: #444;
+}
+.comment-content {
+  display: flex;
+  margin-bottom: 50px;
+}
+.comment-content .image {
+  flex-basis: 70px;
+}
+.comment-content img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.comment-content .box {
+  flex: 1;
+}
+.comment-content .header {
+  display: flex;
+  align-items: center;
+  gap: 0px 8px;
+}
+.comment-content .header h6 a {
+  color: #333;
+  font-size: 13px;
+  font-weight: 400;
+}
+.comment-content .header span {
+  color: #aaa;
+  font: 14px;
+}
+
+.comment-content p {
+  color: #666;
+  line-height: 1.6;
 }
 /* End Comment */
 /* Start Footer */

@@ -44,7 +44,23 @@
 	</div>
 </div>
 <div class="comment">
+	<h3 class="comments-header" >Comments</h3>
+	{% for comment in comments %}
+		<div class="comment-content">
+			<div class="image">
+				<img src="http://127.0.0.1:8000/media/post_images/default.jpg" alt="">
+			</div>
+			<div class="box">
+				<div class="header">
+					<h6><a href="">{{comment.user.username}}</a></h6>
+					<span>{{comment.created_at}}</span>
+				</div>
+				<p>{{comment.content}}</p>
+			</div>
+		</div>
+	{% endfor %}
 	<form action="" method="POST">
+		<h3 class="comments-header" >Write Comment</h3>
 		{% csrf_token %}
 		{{comment_form}}
 		<input type="submit" value="Post Comment">

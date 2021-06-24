@@ -10,7 +10,7 @@
 		<ul>
 			<li class="category">
 				{% for category in post.categories.all %}  
-					<a href="#">{{category}}</a>
+					<a href="{% url 'post:home' %}?category={{category}}">{{category}}</a>
 				{% endfor %}
 			</li>
 			<li class="date">

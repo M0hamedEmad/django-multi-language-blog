@@ -1,12 +1,32 @@
 <div class="pagination">
-    <p>page 1 of 6</p>
-    <a href=""><i class="fas fa-angle-double-left"></i></a>
-    <ul>
-        <li class="active"><a href="">1</a></li>
-        <li><a href="">2</a></li>
-        <li><a href="">3</a></li>
-        <li class="points" >...</li>
-        <li><a href="">6</a></li>
-    </ul>
-    <a href=""><i class="fas fa-angle-double-right"></i></a>
+	<p>page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</p>
+	<div class="icon">
+			{% if page_obj.has_previous %}
+					<a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page_obj.previous_page_number}}"><i class="fas fa-angle-double-left"></i></a>
+			{% endif %}
+	</div>
+	<ul>
+	{% for page in page_obj.paginator.page_range %}
+			{% if page == page_obj.number or page == page_obj.number|add:'1' %}
+				<li
+						{% if page == page_obj.number %}
+								class="active"
+						{% endif %}
+				>
+				<a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page}}">{{page}}</a>
+				</li>
+			{% elif page == page_obj.number|add:'-1' %}
+					<li><a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page}}">{{page}}</a></li>
+			{% elif page == page_obj.number|add:'2' %}
+					<li><a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page}}">{{page}}</a></li>
+					<li class="points" >...</li>
+					<li><a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page}}">{{page_obj.paginator.num_pages}}</a></li>
+			{% endif %}
+	{% endfor %}
+	</ul>
+		<div class="icon">
+			{% if page_obj.has_next %}
+					<a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page_obj.next_page_number}}"><i class="fas fa-angle-double-left"></i></a>
+			{% endif %}
+		</div>
 </div>

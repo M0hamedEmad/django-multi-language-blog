@@ -387,9 +387,12 @@ g {
 .pagination p {
   color: #777;
 }
-.pagination i {
-  margin: 0px 13px;
+.pagination .icon {
+  margin: 0px 6px;
   
+}
+.pagination .icon i {
+  margin: 0px 6px;
 }
 .pagination ul {
 

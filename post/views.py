@@ -9,11 +9,28 @@ class PostList(ListView):
     model = Post
     template_name = 'post/posts.html'
     context_object_name = 'posts'
+    paginate_by = 4
     
     def get_queryset(self):
         # render posts that active = true and published_at before now
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
+        
+        # filter posts by categories
+        category = self.request.GET.get('category')
+        
+        if category:
+            queryset = queryset.filter(categories__name=category)
+            
+        # Search Field
+        q = self.request.GET.get('q')
+        
+        if q:
+            q = q.strip()
+            queryset = queryset.filter( Q(title__icontains=q) | Q(content__icontains=q) )
+            
+            
         return queryset
+    
     
 class PostDetail(DetailView):
     model = Post
@@ -21,6 +38,10 @@ class PostDetail(DetailView):
     context_object_name = 'post'
     
     def get(self, request, *args, **kwargs):
+        """ 
+        overwrite get function to incrase views_count by 1 
+
+        """
         post = self.get_object()
         post.views_count += 1
         post.save()
@@ -34,13 +55,14 @@ class PostDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        posts = self.model.objects.all()
+        posts = self.get_queryset()
         obj_categories = self.get_object().categories.all() # get object categories
         
         related_posts = None 
         if obj_categories: # Are object has category
             related_posts = posts.filter(categories__in=obj_categories)[:3]
         
+        # if related_posts none render 3 random posts
         if related_posts is None:
             related_posts = random.sample(list(posts), 3)
         

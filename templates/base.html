@@ -21,10 +21,10 @@
     <!-- Start Header -->
     <header>
       <div class="container">
-        <div class="logo"><a href="#">VersAlle</a></div>
+        <div class="logo"><a href="{% url 'post:home' %}">VersAlle</a></div>
         <nav>
           <ul>
-            <li class="active" ><a href="#">HOME PAGE</a></li>
+            <li class="active" ><a href="{% url 'post:home' %}">HOME PAGE</a></li>
             <li><a href="#">About Us</a></li>
             <li><a href="#">Blog Single</a></li>
             <li><a href="#">Portfolio</a></li>
@@ -39,8 +39,8 @@
       <div class="container">
         <div class="main">
             <div class="content-top">
-              <form action="" method="get">
-                <input type="search" name="search" id="" placeholder="Search...">
+              <form action="{% url 'post:home' %}" method="get">
+                <input type="search" name="q" id="" placeholder="Search..." value={{request.GET.q}}>
                 <input type="submit" value="Search">
               </form>
               <div class="social-icon">

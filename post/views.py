@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import FormMixin
 from django.utils.timezone import now
 from django.db.models import Q
@@ -97,4 +97,9 @@ class PostDetail(FormMixin, DetailView):
         
         return context
     
+    
+class CommentDelete(DeleteView):
+    model = Comment
+    def get_success_url(self):
+        return reverse('post:post', kwargs={'slug':self.object.post.slug})
     

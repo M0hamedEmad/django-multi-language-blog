@@ -55,16 +55,28 @@
 					<h6><a href="">{{comment.user.username}}</a></h6>
 					<span>{{comment.created_at}}</span>
 				</div>
-				<p>{{comment.content}}</p>
+				<div class="cont">
+					<p>{{comment.content}}</p>
+					{% if comment.user == user %}
+						<div class="icons">
+							<a href="{% url 'post:delete_comment' comment.id %}" alt="Delete"><i class="far fa-trash-alt"></i></a>
+							<!-- <a href="#" alt="Edit"><i class="far fa-edit"></i></a> -->
+						</div>
+					{% endif %}
+				</div>
 			</div>
 		</div>
 	{% endfor %}
-	<form action="" method="POST">
-		<h3 class="comments-header" >Write Comment</h3>
-		{% csrf_token %}
-		{{comment_form}}
-		<input type="submit" value="Post Comment">
-	</form>
+	{% if request.user.is_authenticated %}
+		<form action="" method="POST">
+			<h3 class="comments-header" >Write Comment</h3>
+			{% csrf_token %}
+			{{comment_form}}
+			<input type="submit" value="Post Comment">
+		</form>
+		{% else %}
+		<p>You are not logged in, please <a href="#">login</a> and leave a comment.</p>
+	{% endif %}		
 </div>
 </div>
 {% endblock content %}

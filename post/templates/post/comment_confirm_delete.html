@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<p>Are you sure you want to delete comment "{{object}}" ?</p>
+<form action="" method="POST">
+    {% csrf_token %}
+    <input class="danger" type="submit" value="Yes Delete">
+    <a class="btn" href="{% url 'post:post' object.post.slug %}">No</a>
+</form>
+{% endblock content %}

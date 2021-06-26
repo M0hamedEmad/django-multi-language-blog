@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import FormView
 from django.contrib.auth.models import User
+from django.contrib import messages
+from django.views.generic import FormView
 from .forms import UserLoginForm,RegistrationForm
 
 class RegisterView(FormView):
@@ -36,7 +37,6 @@ class RegisterView(FormView):
 class LoginPage(LoginView):
     template_name = 'account/login.html'
     form_class = UserLoginForm
-    # authentication_form = UserLoginForm
     
     def get(self, request, *args, **kwargs):
         """ 
@@ -51,3 +51,9 @@ class LoginPage(LoginView):
         
         return super().get(request, *args, **kwargs)
     
+class LogoutPage(LogoutView):
+    next_page = reverse_lazy('post:home')
+
+    # def get_next_page(self):
+    #     messages.success(self.request, 'You have successfully logged out')
+    #     super().get_next_page()

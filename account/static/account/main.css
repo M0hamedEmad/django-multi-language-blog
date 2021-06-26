@@ -33,14 +33,14 @@ form.account legend {
 	margin: 15px 0px;
 	font-weight: 500;
 }
-form.account input[type='text'],
-form.account input[type='password'] {
+form.account input:not(input[type='submit'])
+{
 	display: block;
 	background: none;
 	border: 2px solid #3498db;
 	text-align: center;
 	padding: 15px 10px;
-	margin: 20px auto;
+	margin: 0px auto 20px;
 	width: 200px;
 	outline: none;
 	color: white;
@@ -58,6 +58,10 @@ form.account input[type='password'] {
 form.account input[type='text']:focus,
 form.account input[type='password']:focus {
 	border-color: #2ecc71;
+}
+form.account label {
+    display: block;
+    margin-bottom: 5px;
 }
 form.account input[type='submit']{
 	display: block;

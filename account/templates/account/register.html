@@ -1,0 +1,13 @@
+{% extends 'account/account_base.html' %}
+{% block content %}
+  <div class="form">
+    <form action="" method="post" class="account">
+      <legend>Login</legend>
+      {% csrf_token %}
+      {{form}}
+      <input type="submit" value="login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <p class="af-form">Have an account <a href="{% url 'account:login' %}">Logein</a></p>
+  </div>
+{% endblock content %}

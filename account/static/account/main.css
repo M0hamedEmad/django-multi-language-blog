@@ -55,6 +55,12 @@ form.account input:not(input[type='submit'])
 	-ms-transition: .3s;
 	-o-transition: .3s;
 }
+.form-header {
+    position: absolute;
+    top: 21%;
+    left: 50%;
+    transform: translate(-50%);
+}
 form.account input[type='text']:focus,
 form.account input[type='password']:focus {
 	border-color: #2ecc71;

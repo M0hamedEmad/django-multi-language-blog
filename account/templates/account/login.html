@@ -1,0 +1,26 @@
+{% extends 'account/account_base.html' %}
+{% block content %}
+  <div class="form">
+      {% if form.errors %}
+      <!-- <p>Your username and password didn't match. Please try again</p> -->
+      {{form.errors.inactive}}
+    {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+      {% else %}
+        <p>Please login to see this page.</p>
+      {% endif %}
+    {% endif %}
+
+    <form action="" method="post" class="account">
+      {% csrf_token %}
+      {{form}}
+      <input type="submit" value="login" />
+      <input type="hidden" name="next" value="{{ next }}" />
+    </form>
+    <p class="af-form">Lost your Password <a href="#">Reset Your Password</a></p>
+  </div>
+{% endblock content %}

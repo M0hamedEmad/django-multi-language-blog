@@ -4,8 +4,8 @@ from .forms import UserLoginForm
 
 class LoginPage(LoginView):
     template_name = 'account/login.html'
-    # form_class = UserLoginForm
-    authentication_form = UserLoginForm
+    form_class = UserLoginForm
+    # authentication_form = UserLoginForm
     
     def get(self, request, *args, **kwargs):
         if request.user.is_authenticated:

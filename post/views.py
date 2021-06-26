@@ -7,6 +7,7 @@ from .models import Category, Post, Comment
 from .forms import CommentForm
 import random
 
+
 class PostList(ListView):
     model = Post
     template_name = 'post/posts.html'

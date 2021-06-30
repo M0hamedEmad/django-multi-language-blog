@@ -60,3 +60,45 @@ class PostDeleteView(DeleteView):
         messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
         return super().delete(request, *args, **kwargs)
         
+        
+  
+# Category Views 
+
+class CategoryListView(ListView):
+    model = Category
+    template_name = 'dashboard/category_list.html'
+    context_object_name = 'categories'
+    
+
+class CategoryCreateView(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'dashboard/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.name}" has been created successfully')
+        return super().form_valid(form)
+    
+
+class CategoryUpdateView(UpdateView):
+    model = Category
+    context_object_name = 'category'
+    form_class = CategoryForm
+    template_name = 'dashboard/category_form.html'
+    success_url = reverse_lazy('dashboard:categories')
+    
+    
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.name}" has been updated successfully')
+        return super().form_valid(form)
+        
+    
+class CategoryDeleteView(DeleteView):
+    model = Category
+    template_name = 'dashboard/confirm_delete.html'
+    success_url = reverse_lazy('dashboard:categories')     
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
+        return super().delete(request, *args, **kwargs)        

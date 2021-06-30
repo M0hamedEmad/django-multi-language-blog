@@ -57,12 +57,14 @@
 					<p>Profile</p>
 				</a>
 			</li>
-			<li>
-				<a href="{% url 'dashboard:accounts' %}">
-					<i class="fas fa-users"></i>
-					<p>Users</p>
+			{% if user.profile.is_admin %}
+				<li>
+					<a href="{% url 'dashboard:accounts' %}">
+						<i class="fas fa-users"></i>
+						<p>Users</p>
 					</a>
-			</li>
+				</li>
+			{% endif %}
 																	
 		</ul>
 	</nav>

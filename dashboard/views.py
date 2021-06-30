@@ -1,20 +1,25 @@
 from django.shortcuts import render, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
-from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Group
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.urls import reverse_lazy
 from django.contrib import messages
+from django.utils.decorators import method_decorator
 from post.models import Post, Comment, Category
-from account.models import Profile
 from .forms import CategoryForm, UserForm, UserUpdateForm, ProfileForm, PostForm
+from .decorators import admin_and_editor_only, admin_only
+from account.models import Profile
 
 # Posts Views
 
-class PostListView(ListView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'dashboard/post_list.html'
     context_object_name = 'posts'
 
-class PostCreateView(CreateView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'dashboard/post_form.html'
     form_class = PostForm
@@ -33,11 +38,15 @@ class PostCreateView(CreateView):
     def get_success_url(self):
         return reverse('post:post', kwargs={'slug':self.post_slug})
 
-class PostUpdateView(UpdateView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'dashboard/post_form.html'
     form_class = PostForm
     post_slug = None
+    
+    def test_func(self):
+        return self.request.user.is_superuser or self.get_object().author == self.request.user
     
     def form_valid(self, form):
         messages.success(self.request, f'"{form.instance.title}" has been updated successfully')
@@ -49,8 +58,8 @@ class PostUpdateView(UpdateView):
     def get_success_url(self):
         return reverse('post:post', kwargs={'slug':self.post_slug})    
 
-
-class PostDeleteView(DeleteView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     template_name = 'dashboard/confirm_delete.html'
     success_url = reverse_lazy('dashboard:posts')     
@@ -62,13 +71,14 @@ class PostDeleteView(DeleteView):
     
 # Category Views 
 
-class CategoryListView(ListView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'dashboard/category_list.html'
     context_object_name = 'categories'
     
-
-class CategoryCreateView(CreateView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class CategoryCreateView(LoginRequiredMixin, CreateView):
     model = Category
     form_class = CategoryForm
     template_name = 'dashboard/category_form.html'
@@ -78,8 +88,8 @@ class CategoryCreateView(CreateView):
         messages.success(self.request, f'"{form.instance.name}" has been created successfully')
         return super().form_valid(form)
     
-
-class CategoryUpdateView(UpdateView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class CategoryUpdateView(LoginRequiredMixin, UpdateView):
     model = Category
     context_object_name = 'category'
     form_class = CategoryForm
@@ -91,8 +101,8 @@ class CategoryUpdateView(UpdateView):
         messages.success(self.request, f'"{form.instance.name}" has been updated successfully')
         return super().form_valid(form)
         
-    
-class CategoryDeleteView(DeleteView):
+@method_decorator(admin_and_editor_only, name='dispatch')    
+class CategoryDeleteView(LoginRequiredMixin, DeleteView):
     model = Category
     template_name = 'dashboard/confirm_delete.html'
     success_url = reverse_lazy('dashboard:categories')     
@@ -103,14 +113,16 @@ class CategoryDeleteView(DeleteView):
     
 # Comments Views
 
-class CommentListView(ListView):
+@method_decorator(admin_and_editor_only, name='dispatch')
+class CommentListView(LoginRequiredMixin, ListView):
     model = Comment
     template_name = 'dashboard/comment_list.html'
     context_object_name = 'comments'
     
 
 # Accounts Views
-class AccountListView(ListView):
+@method_decorator(admin_only, name='dispatch')
+class AccountListView(LoginRequiredMixin, ListView):
     model = User
     template_name = 'dashboard/account_list.html'
     context_object_name = 'accounts'
@@ -126,8 +138,8 @@ class AccountListView(ListView):
         
         return context
         
-        
-class AccountCreateView(CreateView):
+@method_decorator(admin_only, name='dispatch')
+class AccountCreateView(LoginRequiredMixin, CreateView):
     model = User
     template_name = 'dashboard/account_form.html'
     context_object_name = 'accounts'
@@ -143,8 +155,9 @@ class AccountCreateView(CreateView):
             messages.success(self.request, f'"{form.instance.username}" has been created successfully')
 
         return super().form_valid(form)
-    
-class AccountUpdateView(UpdateView):
+
+@method_decorator(admin_only, name='dispatch')
+class AccountUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     template_name = 'dashboard/account_form.html'
     context_object_name = 'account'
@@ -170,8 +183,9 @@ class AccountUpdateView(UpdateView):
             form.check_email(self.get_object().email)
             messages.success(self.request, f'"{form.instance.username}" has been updated successfully')
         return super().form_valid(form)    
-    
-class AccountDeleteView(DeleteView):
+
+@method_decorator(admin_only, name='dispatch')    
+class AccountDeleteView(LoginRequiredMixin, DeleteView):
     model = User
     template_name = 'dashboard/confirm_delete.html'
     success_url = reverse_lazy("dashboard:accounts")        
@@ -180,7 +194,7 @@ class AccountDeleteView(DeleteView):
     
 # Profile
 
-class ProfileView(FormView):
+class ProfileView(LoginRequiredMixin, FormView):
     model = User
     template_name = 'dashboard/profile.html'
     success_url = reverse_lazy("dashboard:profile")

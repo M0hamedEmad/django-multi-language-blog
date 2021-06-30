@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from dashboard.decorators import get_or_create_editor_admin_group
 from PIL import Image
 
 def upload_image(instance, image_name):
@@ -16,11 +17,41 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     picture = models.ImageField(default='profile_pics/default.jpg', upload_to=upload_image, null=True, blank=True)
     
+    @property    
+    def is_admin(self):        
+        _ , admin_group = get_or_create_editor_admin_group()
+        
+        if self.user.is_superuser:
+            return True
+
+        elif self.user.groups.exists():
+            if admin_group in self.user.groups.all():
+                return True
+
+        return False
+    
+    @property    
+    def is_admin_or_editor(self):        
+        editors_group , admin_group = get_or_create_editor_admin_group()
+        
+        if self.user.is_superuser:
+            return True
+
+        elif self.user.groups.exists():
+            groups = self.user.groups.all()
+            if admin_group in groups or editors_group in groups:
+                return True
+
+        return False
+        
     def __str__(self):
         try:
             return self.user.username
         except:
+     
             return "none"
+            
+    
     
     def save(self, *args, **kwargs):
         """

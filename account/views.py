@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
+from django.contrib.auth import login
 from django.contrib import messages
 from django.views.generic import FormView, View
 from .forms import UserLoginForm,RegistrationForm
@@ -26,7 +27,7 @@ class RegisterView(FormView):
         """ 
         override form_vaild finction to make user login after register
         Note:
-            if you add email verification delete it    
+            if you will add email verification delete this func   
             
         """
         user = form.save()

@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, reverse
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils.timezone import now
 from django.db.models import Q
 from .models import Category, Post, Comment
@@ -12,13 +13,13 @@ class PostList(ListView):
     model = Post
     template_name = 'post/posts.html'
     context_object_name = 'posts'
-    paginate_by = 4
+    paginate_by = 10
     
     def get_queryset(self):
         # render posts that active = true and published_at before now
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
         
-        # filter posts by categories
+        # filter posts by categories => if url path has a ?category=
         category = self.request.GET.get('category')
         
         if category:
@@ -30,7 +31,6 @@ class PostList(ListView):
         if q:
             q = q.strip()
             queryset = queryset.filter( Q(title__icontains=q) | Q(content__icontains=q) )
-            
             
         return queryset
     
@@ -51,24 +51,7 @@ class PostDetail(FormMixin, DetailView):
         post.save()
         return super().get(request,*args, **kwargs)
     
-    def post(self, request, *args, **kwargs):
-        self.obj = self.get_object()
-        form = self.get_form()
-        if form.is_valid():
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-        
-    def form_valid(self, form):
-        form_2 = form.save(commit=False)
-        form_2.user = self.request.user
-        form_2.post = self.get_object()
-        form_2.save()
-        return super().form_valid(form)        
-    
-    def get_success_url(self):
-        return reverse('post:post',  kwargs={'slug': self.get_object().slug})
-        
+            
     def get_queryset(self):
         # render posts that active = true and published_at before now
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
@@ -99,8 +82,33 @@ class PostDetail(FormMixin, DetailView):
         return context
     
     
-class CommentDelete(DeleteView):
+    
+    def post(self, request, *args, **kwargs):
+        self.obj = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+        
+    def form_valid(self, form):
+        form_2 = form.save(commit=False)
+        form_2.user = self.request.user
+        form_2.post = self.get_object()
+        form_2.save()
+        return super().form_valid(form)        
+    
+    def get_success_url(self):
+        return reverse('post:post',  kwargs={'slug': self.get_object().slug})
+
+
+class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
+    
+    def test_func(self):
+        user = self.request.user
+        return self.get_object().user == user or user.is_superuser or user.profile.is_admin
+    
     def get_success_url(self):
         return reverse('post:post', kwargs={'slug':self.object.post.slug})
     

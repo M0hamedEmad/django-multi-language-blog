@@ -57,7 +57,7 @@ class Profile(models.Model):
         """
             Overwrite save mehtod to rename a image and resize a big image
         """
-
+        
         # Handle problem in upload_image function  (pk not generator yet)
         if self.pk is None:
             image = self.picture

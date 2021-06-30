@@ -13,7 +13,6 @@ from  .views import (
     AccountCreateView,
     AccountUpdateView,
     AccountDeleteView,
-    ProfileView,
     )
 
 app_name = 'dashboard'
@@ -39,8 +38,5 @@ urlpatterns = [
     path('account/create/', AccountCreateView.as_view(), name='accounts_create'),
     path('account/update/<int:pk>/', AccountUpdateView.as_view(), name='accounts_update'),
     path('account/delete/<int:pk>/', AccountDeleteView.as_view(), name='accounts_delete'),
-    
-    #profile
-    path('dashboard/profile/', ProfileView.as_view(), name='profile'),
     
 ]

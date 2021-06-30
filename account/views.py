@@ -2,10 +2,11 @@ from django.shortcuts import render, redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login
 from django.contrib import messages
 from django.views.generic import FormView, View
-from .forms import UserLoginForm,RegistrationForm
+from .forms import UserLoginForm,RegistrationForm, UserProfileForm
 
 
 class RegisterView(FormView):
@@ -60,6 +61,22 @@ class LogoutPage(LogoutView):
     #     messages.success(self.request, 'You have successfully logged out')
     #     super().get_next_page()
     
-class ProfileView(View):
-    def get(self, request, *argks, **kwargs):
-        return render(request, 'account/profile.html')
+# Profile
+
+class ProfileView(LoginRequiredMixin, View):
+    template_name = 'account/profile.html'
+    
+    def get(self, request, *args, **kwargs):
+        form = UserProfileForm(instance=self.request.user)
+        return render(request, self.template_name, {'form':form})
+    
+    def post(self, request, *args, **kwargs):
+        form = UserProfileForm(request.POST ,instance=self.request.user)
+        if form.is_valid():
+            form.save()
+        form = UserProfileForm(instance=self.request.user)
+        return self.get(request, *args, **kwargs)
+    
+    
+ 
+    

@@ -1,5 +1,5 @@
 from django.shortcuts import render, reverse
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, FormView, View
 from django.contrib.auth.models import User, Group
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
@@ -191,26 +191,3 @@ class AccountDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("dashboard:accounts")        
     
     
-    
-# Profile
-
-class ProfileView(LoginRequiredMixin, FormView):
-    model = User
-    template_name = 'dashboard/profile.html'
-    success_url = reverse_lazy("dashboard:profile")
-    
-    def get_form(self):
-        return UserUpdateForm(instance=self.request.user)
-
-    def post(self, request, *args, **kwargs):
-        form = UserUpdateForm(request.POST ,instance=self.request.user)
-        if form.is_valid():
-            return self.form_valid(form)
-        return super().post(request, *args, **kwargs)
-    
-    def form_valid(self, form):
-        print(form.instance.email)
-        form.check_email(form.instance.email)
-        form.save()
-        messages.success(self.request, f'"{form.instance.username}" has been updated successfully')
-        return super().form_valid(form)

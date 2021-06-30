@@ -20,6 +20,7 @@
 		<div class="logo">
 			<h1>Dashboard</h1>
 		</div>
+		{% if user.profile.is_admin_or_editor %}
 		<ul>
 			<li class="active">
 				<a href="">
@@ -52,7 +53,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="{% url 'dashboard:profile' %}">
+				<a href="{% url 'profile' %}">
 					<i class="fas fa-id-card-alt"></i>
 					<p>Profile</p>
 				</a>
@@ -67,6 +68,7 @@
 			{% endif %}
 																	
 		</ul>
+		{% endif %}
 	</nav>
 	<div class="main-content">
 		<header>

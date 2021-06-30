@@ -67,7 +67,7 @@ class UserUpdateForm(forms.ModelForm):
             return self.cleaned_data.get('email')
         else:
             raise forms.ValidationError('Email already exists.')
-        
+ 
     
 class ProfileForm(forms.ModelForm):
     class Meta:

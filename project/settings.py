@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Blog Apps
     'post.apps.PostConfig',
     'account.apps.AccountConfig',
+    'dashboard.apps.DashboardConfig'
 ]
 
 MIDDLEWARE = [

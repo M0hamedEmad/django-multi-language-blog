@@ -3,8 +3,9 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.views.generic import FormView
+from django.views.generic import FormView, View
 from .forms import UserLoginForm,RegistrationForm
+
 
 class RegisterView(FormView):
     model = User
@@ -57,3 +58,7 @@ class LogoutPage(LogoutView):
     # def get_next_page(self):
     #     messages.success(self.request, 'You have successfully logged out')
     #     super().get_next_page()
+    
+class ProfileView(View):
+    def get(self, request, *argks, **kwargs):
+        return render(request, 'account/profile.html')

@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+	<legend>User Profile</legend>
+</div>
+<div class="profile-content">
+	<div class="card">
+			<img src="{{user.profile.picture.url}}" alt="Person" class="card__image">
+			<p class="card__name">{{user.username}}</p>
+			<p class="card__name">{{user.email}}</p>
+			<div class="stat">
+				<div >{{user.post_set.all.count}} Post</div>
+				<div>{{user.comment_set.all.count}} Comment</div>
+			</div>
+			<a href='{% url "password_change" %}' class="btn info">Change Password</a>
+			<a class="btn danger">Delete Profile</a>
+	</div>
+	<div class="form">
+		<form method="post" enctype='multipart/form-data' class="special">
+			<p class="form_p">Create Account</p>
+			{% csrf_token %}
+			{{form}}
+			<input type="submit" value="Save" class="btn info">
+		</form>
+	</div>
+</div>
+{% endblock content  %}

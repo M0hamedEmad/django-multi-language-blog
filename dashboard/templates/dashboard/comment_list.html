@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+  <legend>Comments List</legend>
+</div>
+<div class="table">
+  <table>
+  <thead>
+    <tr>
+    <th>Author</th>
+      <th>Comment</th>
+      <th>Post</th>
+      <th>Created at</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comment in comments %}
+      <tr>
+        <td>{{comment.user}}</td>
+        <td>{{comment.content|truncatewords:"6"}}</td>
+        <td>{{comment.post|truncatewords:"6"}}</td>
+        <td>{{comment.created_at|date:'d M Y h:i'}}</td>
+        <td><a href="{% url 'post:delete_comment' comment.id %}" class="btn btn-sm danger">Delete</a></td>
+      </tr>
+    {% endfor %}      
+  </tbody>
+  </table>				
+</div>
+{% endblock content  %}

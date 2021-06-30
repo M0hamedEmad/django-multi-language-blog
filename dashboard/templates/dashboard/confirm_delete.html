@@ -1,0 +1,24 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+  <legend>
+    Delete {{object}}
+  </legend>
+</div>
+<p>Are You Sure You Want Delete '{{object}}'</p>
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="submit" value="Yes, Delete it" class="btn info">
+  <a href="
+  {% if 'comment' in request.path %}
+    {% url 'dashboard:comments' %}  
+  {% elif 'post' in request.path %}    
+    {% url 'dashboard:posts' %}
+  {% elif 'category' in request.path %}
+    {% url 'dashboard:categories' %}
+  {% else %}
+    {% url 'dashboard:accounts' %}
+  {% endif %}
+  " class="btn info">No</a>
+</form>
+{% endblock content  %}

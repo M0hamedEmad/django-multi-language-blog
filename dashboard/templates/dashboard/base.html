@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard</title>
+	  <!-- Font Awesome -->
+    <link rel="stylesheet" href="css/all.min.css">
+	<!-- Main Template Css File -->
+	<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link 
+	href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+	<nav>
+		<div class="logo">
+			<h1>Dashboard</h1>
+		</div>
+		<ul>
+			<li class="active">
+				<a href="">
+					<i class="fas fa-pen"></i>
+					<p>Dashboard</p>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'dashboard:post_create' %}">
+					<i class="fas fa-plus"></i>
+					<p>Add New Post</p>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'dashboard:posts' %}">
+					<i class="fas fa-list"></i>
+					<p>Posts</p>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'dashboard:categories' %}">
+					<i class="fas fa-list"></i>
+					<p>Categoriest</p>
+				</a>
+			</li>				
+			<li>
+				<a href="{% url 'dashboard:comments' %}">
+				<i class="fas fa-comments"></i>
+					<p>Comments</p>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'dashboard:profile' %}">
+					<i class="fas fa-id-card-alt"></i>
+					<p>Profile</p>
+				</a>
+			</li>
+			<li>
+				<a href="{% url 'dashboard:accounts' %}">
+					<i class="fas fa-users"></i>
+					<p>Users</p>
+					</a>
+			</li>
+																	
+		</ul>
+	</nav>
+	<div class="main-content">
+		<header>
+			<form action="" method="get" class="search">
+				<input type="search" name="search" id="" placeholder="Search For Something..">
+			</form>
+			<div class="notification">
+				<i class="far fa-bell"></i>
+			</div>
+			<div class="profile">
+				<div class="image">
+					<img src="https://e7.pngegg.com/pngimages/442/477/png-clipart-computer-icons-user-profile-avatar-profile-heroes-profile.png" alt="profile-image">
+				</div>
+				<p>admin</p>
+			</div>
+		</header>
+		{% if messages %}
+			<ul class="messages">
+				{% for message in messages %}
+				<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		<section class="content">
+            {% block content %}
+            {% endblock content %}
+		</section>
+	</div>
+</body>
+</html>

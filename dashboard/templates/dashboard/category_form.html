@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+  <legend>
+    {% if 'create' in request.path %}
+      Create New Categoy
+    {% else %}
+      Update "{{category}}"
+    {% endif %}
+  </legend>
+  <a href="{% url 'dashboard:categories' %}" class="btn info">Back To Categories</a>
+</div>
+<form action="" method="post">
+  {% csrf_token %}
+  <input type="text" name="name" maxlength="50" required="" id="id_name" class='special' placeholder="Write category name here" value='{{category}}'>
+  <input type="submit" value="Add Category" class="btn info">
+</form>
+{% endblock content  %}

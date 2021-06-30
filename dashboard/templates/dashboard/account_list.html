@@ -1,0 +1,51 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+  <legend>Accounts List</legend>
+  <a href="{% url 'dashboard:accounts_create' %}" class="btn info">Create New Account</a>
+</div>
+<div class="table">
+  <table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>UserName</th>
+      <th>Fist Name</th>
+      <th>Last Name</th>
+      <th>Email Address</th>
+      <th>Status</th>
+      <th>Date joined</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for account in accounts %}
+      <tr>
+        <td>{{account.id}}</td>
+        <td>{{account.username|default:'N/A'|slice:'8'}}</td>
+        <td>{{account.first_name|default:'N/A'|slice:'8'}}</td>
+        <td>{{account.last_name|default:"N/A"|slice:'8'}}</td>
+        <td>{{account.email|default:'N/A'|slice:'8'}}</td>
+        <td>
+            {% if account.is_superuser %}
+                Super User
+            {% elif account.is_staff %}
+                Staff
+            {% elif not account.is_active %}
+                <p class="btn btn-sm danger">inactive</p>
+            {% elif editors_group in account.groups.all %}               
+                Editor
+            {% else %}               
+                Member
+            {% endif %}
+        </td>
+        <td>{{account.date_joined|date:'d M Y h:i'}}</td>
+        <td><a href="{% url 'dashboard:accounts_update' account.id %}" class="btn btn-sm warning">Update</a></td>
+        <td><a href="{% url 'dashboard:accounts_delete' account.id %}" class="btn btn-sm danger">Delete</a></td>
+      </tr>
+    {% endfor %}      
+  </tbody>
+  </table>				
+</div>
+{% endblock content  %}

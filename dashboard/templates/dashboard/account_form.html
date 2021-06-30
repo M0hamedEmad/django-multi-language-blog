@@ -1,0 +1,27 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+<div class="content-header">
+  <legend>
+    {% if 'create' in request.path %}
+      Create New User
+    {% else %}
+      Update "{{account}}"
+    {% endif %}
+  </legend>
+  <a href="{% url 'dashboard:accounts' %}" class="btn info">Back To Account</a>
+</div>
+<form method="post" enctype='multipart/form-data' class="special">
+  <p class="form_p">
+    {% if 'create' in request.path %}
+      Create Account
+    {% else %}
+      Update Account  ID:{{account.id}}
+    {% endif %}
+  </p>
+  {% csrf_token %}
+  {{form}}
+  <img src="" alt="" style='width: 300px;'>
+  {{p_form}}
+  <input type="submit" value="Save" class="btn info">
+</form>
+{% endblock content  %}

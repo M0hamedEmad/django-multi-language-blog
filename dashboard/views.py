@@ -111,4 +111,72 @@ class CommentListView(ListView):
     template_name = 'dashboard/comment_list.html'
     context_object_name = 'comments'
     
+
+# Accounts Views
+class AccountListView(ListView):
+    model = User
+    template_name = 'dashboard/account_list.html'
+    context_object_name = 'accounts'
     
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        try:
+            context['editors_group'] = Group.objects.get(name='editors')
+        except:
+            Group.objects.create(name='editors')
+        
+        return context
+        
+        
+class AccountCreateView(CreateView):
+    model = User
+    template_name = 'dashboard/account_form.html'
+    context_object_name = 'accounts'
+    form_class = UserForm    
+    success_url = reverse_lazy("dashboard:accounts")
+    
+
+    def form_valid(self, form):
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data.get('password'))
+            user.save()
+            messages.success(self.request, f'"{form.instance.username}" has been created successfully')
+
+        return super().form_valid(form)
+    
+class AccountUpdateView(UpdateView):
+    model = User
+    template_name = 'dashboard/account_form.html'
+    context_object_name = 'account'
+    form_class = UserUpdateForm    
+    success_url = reverse_lazy("dashboard:accounts")    
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['p_form'] = ProfileForm(instance=self.get_object())
+            
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form_2 = ProfileForm(request.POST, request.FILES, instance=self.get_object())
+        
+        if form_2.is_valid():
+            form_2.save()
+        return super().post(request, *args, **kwargs)
+    
+    def form_valid(self, form):
+        if form.is_valid():
+            form.check_email(self.get_object().email)
+            messages.success(self.request, f'"{form.instance.username}" has been updated successfully')
+        return super().form_valid(form)    
+    
+class AccountDeleteView(DeleteView):
+    model = User
+    template_name = 'dashboard/confirm_delete.html'
+    success_url = reverse_lazy("dashboard:accounts")        
+    
+        

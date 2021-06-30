@@ -13,7 +13,6 @@ class PostListView(ListView):
     model = Post
     template_name = 'dashboard/post_list.html'
     context_object_name = 'posts'
-    
 
 class PostCreateView(CreateView):
     model = Post
@@ -59,9 +58,8 @@ class PostDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
         return super().delete(request, *args, **kwargs)
-        
-        
-  
+    
+    
 # Category Views 
 
 class CategoryListView(ListView):
@@ -101,9 +99,8 @@ class CategoryDeleteView(DeleteView):
     
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
-        return super().delete(request, *args, **kwargs)        
+        return super().delete(request, *args, **kwargs)
     
-  
 # Comments Views
 
 class CommentListView(ListView):
@@ -179,8 +176,8 @@ class AccountDeleteView(DeleteView):
     template_name = 'dashboard/confirm_delete.html'
     success_url = reverse_lazy("dashboard:accounts")        
     
-
-   
+    
+    
 # Profile
 
 class ProfileView(FormView):
@@ -202,4 +199,4 @@ class ProfileView(FormView):
         form.check_email(form.instance.email)
         form.save()
         messages.success(self.request, f'"{form.instance.username}" has been updated successfully')
-        return super().form_valid(form)        
+        return super().form_valid(form)

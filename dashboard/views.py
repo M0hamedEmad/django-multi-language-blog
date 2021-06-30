@@ -102,3 +102,13 @@ class CategoryDeleteView(DeleteView):
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
         return super().delete(request, *args, **kwargs)        
+    
+  
+# Comments Views
+
+class CommentListView(ListView):
+    model = Comment
+    template_name = 'dashboard/comment_list.html'
+    context_object_name = 'comments'
+    
+    

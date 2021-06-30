@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="post">
 	<article>
@@ -23,7 +24,9 @@
 			</li>		
 		</ul>
 	</div>
-  <img class='post-image' src="{{ post.image.url }}" alt="Image Post">
+          {% if post.image %}
+            	<img src="{{ post.image.url }}" alt="Image Post">
+          {% endif %}
 	<p>
 		{{post.content}}
 	</p>
@@ -34,7 +37,11 @@
 		{% for related_post in related_posts %}
 			<article>
 				<a href="{% url 'post:home' %}">
-					<img src="{{ related_post.image.url }}" alt="Image Post">
+					{% if related_post.image %}
+            			<img src="{{ related_post.image.url }}" alt="Image Post">
+          			{% else %}
+            			<img src="{% static 'image/default.jpg' %}" alt="Image Post">
+          			{% endif %}
 					<h3>{{related_post.title}}</h3>
 				</a>
 			</article>

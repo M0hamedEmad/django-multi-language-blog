@@ -34,7 +34,7 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.TextField(max_length=4000)
     categories = models.ManyToManyField(Category, blank=True)
-    image = models.ImageField(default='post_images/default.jpg', upload_to=upload_image, blank=True, null=True)
+    image = models.ImageField(upload_to=upload_image, blank=True, null=True)
     slug = models.SlugField(null=True, blank=True, unique=True, max_length=100)
     active = models.BooleanField(default=True, choices=active_field_choices)
     views_count = models.IntegerField(null=True, blank=True, default=0, editable=False)
@@ -66,12 +66,12 @@ class Post(models.Model):
         super().save(*args, **kwargs)
         
         # image resize
-        img = Image.open(self.image.path)   
-        if img.width > 800 or img.height > 800:
-            img.thumbnail( (800, 800) )
-            img.save(self.image.path)
-            
-        
+        if self.image:
+            img = Image.open(self.image.path)   
+            if img.width > 800 or img.height > 800:
+                img.thumbnail( (800, 800) )
+                img.save(self.image.path)
+    
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     content = models.TextField(max_length=300)

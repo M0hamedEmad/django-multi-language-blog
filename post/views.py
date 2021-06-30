@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import redirect, reverse
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import FormMixin
 from django.utils.timezone import now

@@ -1,10 +1,17 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block content %}
 <div class="articles">
   {% for post in posts %}
   <article>
     <div class="image">
-        <a href="{% url 'post:post' post.slug %}"><img src="{{ post.image.url }}" alt="Image Post"></a>
+        <a href="{% url 'post:post' post.slug %}">
+          {% if post.image %}
+            <img src="{{ post.image.url }}" alt="Image Post">
+          {% else %}
+            <img src="{% static 'image/default.jpg' %}" alt="Image Post">
+          {% endif %}
+        </a>
     </div>
     <div class="article-content">
       <h2><a href="{% url 'post:post' post.slug %}">{{post.title}}</a></h2>

@@ -1,22 +1,23 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
-  <legend>Accounts List</legend>
-  <a href="{% url 'dashboard:accounts_create' %}" class="btn info">Create New Account</a>
+  <legend>{% trans 'accounts list' %}</legend>
+  <a href="{% url 'dashboard:accounts_create' %}" class="btn info">{% trans 'create new account' %}</a>
 </div>
 <div class="table">
   <table>
   <thead>
     <tr>
-      <th>id</th>
-      <th>UserName</th>
-      <th>Fist Name</th>
-      <th>Last Name</th>
-      <th>Email Address</th>
-      <th>Status</th>
-      <th>Date joined</th>
-      <th>Update</th>
-      <th>Delete</th>
+      <th>{% trans 'id' %}</th>
+      <th>{% trans 'UserName' %}</th>
+      <th>{% trans 'Fist Name' %}</th>
+      <th>{% trans 'Last Name' %}</th>
+      <th>{% trans 'Email Address' %}</th>
+      <th>{% trans 'Status' %}</th>
+      <th>{% trans 'Date joined' %}</th>
+      <th>{% trans 'Update' %}</th>
+      <th>{% trans 'Delete' %}</th>
     </tr>
   </thead>
   <tbody>
@@ -29,20 +30,20 @@
         <td>{{account.email|default:'N/A'|slice:'8'}}</td>
         <td>
             {% if account.is_superuser %}
-                Super User
+                {% trans 'Super User' %}
             {% elif account.is_staff %}
-                Staff
+                {% trans 'Staff' %}
             {% elif not account.is_active %}
-                <p class="btn btn-sm danger">inactive</p>
+                <p class="btn btn-sm danger">{% trans 'inactive' %}</p>
             {% elif editors_group in account.groups.all %}               
-                Editor
+                {% trans 'Editor' %}
             {% else %}               
-                Member
+                {% trans 'Member' %}
             {% endif %}
         </td>
         <td>{{account.date_joined|date:'d M Y h:i'}}</td>
-        <td><a href="{% url 'dashboard:accounts_update' account.id %}" class="btn btn-sm warning">Update</a></td>
-        <td><a href="{% url 'dashboard:accounts_delete' account.id %}" class="btn btn-sm danger">Delete</a></td>
+        <td><a href="{% url 'dashboard:accounts_update' account.id %}" class="btn btn-sm warning">{% trans 'Update' %}</a></td>
+        <td><a href="{% url 'dashboard:accounts_delete' account.id %}" class="btn btn-sm danger">{% trans 'Delete' %}</a></td>
       </tr>
     {% endfor %}      
   </tbody>

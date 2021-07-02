@@ -1,12 +1,14 @@
 {% extends 'account/account_base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Register' %}{% endblock title %}
 {% block content %}
   <div class="form">
     <form action="" method="post" class="account">
-      <legend>Login</legend>
+      <legend>{% trans 'Register' %}</legend>
       {% csrf_token %}
       {{form}}
-      <input type="submit" value="Sign up" />
+      <input type="submit" value="{% trans 'Sign up' %}" />
     </form>
-    <p class="af-form">Have an account <a href="{% url 'login' %}">Logein</a></p>
+    <p class="af-form">Have an account <a href="{% url 'login' %}">{% trans 'login' %}</a></p>
   </div>
 {% endblock content %}

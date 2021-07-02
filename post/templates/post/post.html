@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <div class="post">
@@ -6,7 +7,7 @@
   <div class="post-header">
 		<div class="header">
 			<h1>{{post.title}}</h1>
-			<p>{{post.views_count}} views</p>
+			<p>{% blocktranslate with views=post.views_count %}{{views}} views {% endblocktranslate %}</p>
 		</div>
 		<ul>
 			<li class="category">
@@ -32,7 +33,7 @@
 	</p>
 </article>
 <div class="related-posts">
-	<h2>Related Posts</h2>
+	<h2>{% trans 'related posts' %}</h2>
 	<div class="posts">
 		{% for related_post in related_posts %}
 			<article>
@@ -46,12 +47,12 @@
 				</a>
 			</article>
 		{% empty %}
-			No related posts
+			{% trans 'no related posts' %}
 		{% endfor %}
 	</div>
 </div>
 <div class="comment">
-	<h3 class="comments-header" >Comments</h3>
+	<h3 class="comments-header" >{% trans 'comments' %}</h3>
 	{% for comment in comments %}
 		<div class="comment-content">
 			<div class="image">
@@ -66,7 +67,7 @@
 					<p>{{comment.content}}</p>
 					{% if comment.user == user %}
 						<div class="icons">
-							<a href="{% url 'post:delete_comment' comment.id %}" alt="Delete"><i class="far fa-trash-alt"></i></a>
+							<a href="{% url 'post:delete_comment' comment.id %}" alt="{% trans 'delete' %}"><i class="far fa-trash-alt"></i></a>
 							<!-- <a href="#" alt="Edit"><i class="far fa-edit"></i></a> -->
 						</div>
 					{% endif %}
@@ -76,13 +77,14 @@
 	{% endfor %}
 	{% if request.user.is_authenticated %}
 		<form action="" method="POST">
-			<h3 class="comments-header" >Write Comment</h3>
+			<h3 class="comments-header" >{% trans 'write comment' %}</h3>
 			{% csrf_token %}
 			{{comment_form}}
-			<input type="submit" value="Post Comment">
+			<input type="submit" value="{% trans 'post comment' %}">
 		</form>
 		{% else %}
-		<p>You are not logged in, please <a href="#">login</a> and leave a comment.</p>
+		{% url 'login' as login %}
+		<p>{% blocktranslate %}you are not logged in, please<a href="{{login}}">login</a> and leave a comment.{% endblocktranslate %}</p>
 	{% endif %}		
 </div>
 </div>

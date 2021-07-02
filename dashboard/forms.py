@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User, Group
+from django.utils.translation import ugettext_lazy as _
 from post.models import Post, Comment, Category
 from account.models import Profile
 
@@ -12,11 +13,11 @@ class PostForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         
         self.fields['title'].widget.attrs = {
-            'placeholder':'Write your title here'
+            'placeholder':_('Write your title here')
         }
         
         self.fields['content'].widget.attrs = {
-            'placeholder':'Write content here'
+            'placeholder':_('Write content here')
         }
             
 class CategoryForm(forms.ModelForm):
@@ -25,10 +26,10 @@ class CategoryForm(forms.ModelForm):
         fields = ('name', )
         
 class UserForm(forms.ModelForm):
-    username = forms.CharField(help_text='', max_length=70)
-    password = forms.CharField(label='Password', min_length=8, max_length=50, widget=forms.PasswordInput())
-    password2 = forms.CharField(label='Confirm Password', min_length=8, max_length=50, widget=forms.PasswordInput())
-    email = forms.EmailField(label='Email', required=True)
+    username = forms.CharField(label=_('username'), help_text='', max_length=70)
+    password = forms.CharField(label=_('Password'), min_length=8, max_length=50, widget=forms.PasswordInput())
+    password2 = forms.CharField(label=_('Confirm Password'), min_length=8, max_length=50, widget=forms.PasswordInput())
+    email = forms.EmailField(label=_('Email'), required=True)
     
     class Meta:
         model = User
@@ -47,8 +48,8 @@ class UserForm(forms.ModelForm):
         return email  
     
 class UserUpdateForm(forms.ModelForm):
-    username = forms.CharField(help_text='', max_length=70)
-    email = forms.EmailField(label='Email', required=True)
+    username = forms.CharField(label=_('username'), help_text='', max_length=70)
+    email = forms.EmailField(label=_('Email'), required=True)
     
     class Meta:
         model = User

@@ -1,27 +1,28 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
   <legend>
     {% if 'create' in request.path %}
-      Create New User
+      {% trans 'create new user' %}
     {% else %}
-      Update "{{account}}"
+      {% trans 'update account' %} "{{account}}"
     {% endif %}
   </legend>
-  <a href="{% url 'dashboard:accounts' %}" class="btn info">Back To Account</a>
+  <a href="{% url 'dashboard:accounts' %}" class="btn info">{% trans 'back to account' %}</a>
 </div>
 <form method="post" enctype='multipart/form-data' class="special">
   <p class="form_p">
     {% if 'create' in request.path %}
-      Create Account
+      {% trans 'create new user' %}
     {% else %}
-      Update Account  ID:{{account.id}}
+      {% trans 'update account ID' %} "{{account.id}}"
     {% endif %}
   </p>
   {% csrf_token %}
   {{form}}
   <img src="" alt="" style='width: 300px;'>
   {{p_form}}
-  <input type="submit" value="Save" class="btn info">
+  <input type="submit" value="{% trans 'save' %}" class="btn info">
 </form>
 {% endblock content  %}

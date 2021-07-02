@@ -54,7 +54,7 @@ header {
 header .container {
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   color: rgba(255,255,255,.8);
   padding: 8px;
 }
@@ -64,22 +64,40 @@ header a {
   display: inline-block;
   text-transform: uppercase;
 }
+nav {
+  display: flex;
+  justify-content: space-around;
+}
 nav ul {
   text-align: center;
 }
+nav ul li.user {
+  margin-left: 20px;
+}
 nav ul li {
   display: inline-block;
-  margin-left: 25px;
-  margin-right: 25px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 ul li a:hover,
 header .logo a:hover,
 header i:hover {
   color: #fff;
 }
-header i {
-  cursor: pointer;
+/* Start Translation  */
+.translation li{
+  display: inline-block;
+  padding: 0 10px;
 }
+.translation .cur-lan a{
+  color: white;
+}
+.translation .cur-lan a::before {
+  content: '';
+  border: 4px solid;
+  border-color: red transparent transparent red;
+}
+/* End Translation  */
 /* End Header */
 /* Start Content */
 .content {
@@ -389,7 +407,6 @@ g {
 .pagination {
   display: flex;
   justify-content: center;
-  transform: translateX(10%);
   margin: 75px auto 5px;
 }
 .pagination p {

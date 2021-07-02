@@ -1,5 +1,6 @@
+{% load i18n %}
 <div class="pagination">
-	<p>page {{page_obj.number}} of {{page_obj.paginator.num_pages}}</p>
+	<p>{% trans 'page' %} {{page_obj.number}} {% trans 'of' %} {{page_obj.paginator.num_pages}}</p>
 	<div class="icon">
 			{% if page_obj.has_previous %}
 					<a href="?q={{request.GET.q}}&category={{request.GET.category}}&page={{page_obj.previous_page_number}}"><i class="fas fa-angle-double-left"></i></a>

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 {% load post_tags %}
 <!DOCTYPE html>
@@ -6,7 +7,9 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog</title>
+  <title>
+    {% block title %}{% endblock title %}
+  </title>
   <!-- Render All Element Normaly -->
   <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
   <!-- Font Awesome -->
@@ -21,17 +24,36 @@
     <!-- Start Header -->
     <header>
       <div class="container">
-        <div class="logo"><a href="{% url 'post:home' %}">VersAlle</a></div>
+        <div class="logo"><a href="{% url 'post:home' %}">{% translate 'blog' %}</a></div>
+
+        <div class="translation">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% get_language_info_list for LANGUAGES as languages %}
+          <ul>
+            {% for lan in languages %}
+              <li
+              {% if lan.code ==  LANGUAGE_CODE %}
+                class='cur-lan'
+              {% endif %}
+              >
+              <a href="/{{lan.code}}{{request.path|slice:'3:'}}">{{lan.name_local}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>        
         <nav>
           <ul>
-            <li class="active" ><a href="{% url 'post:home' %}">HOME PAGE</a></li>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Blog Single</a></li>
-            <li><a href="#">Portfolio</a></li>
-            <li><a href="#">Contact Us</a></li>
+            {% if user.is_authenticated %}
+              <li class='user'><a href="{% url 'profile' %}">{{user.username}}</a></li>
+              {% if user.profile.is_admin_or_editor %}
+              <li><a href="{% url 'dashboard:posts' %}">{% translate 'dashboard' %}</a></li>
+              {% endif %}
+              <li><a href="{% url 'logout' %}">{% translate 'logout' %}</a></li>
+            {% else %}              
+              <li><a href="{% url 'login' %}">{% translate 'login' %}</a></li>
+            {% endif %}
           </ul>
         </nav>
-        <i class="fas fa-search"></i>
       </div>
     </header>
     <!-- End Header -->
@@ -40,8 +62,8 @@
         <div class="main">
             <div class="content-top">
               <form action="{% url 'post:home' %}" method="get">
-                <input type="search" name="q" id="" placeholder="Search..." value={{request.GET.q}}>
-                <input type="submit" value="Search">
+                <input type="search" name="q" id="" placeholder="{% translate 'search' %}..." value={{request.GET.q}}>
+                <input type="submit" value="{% translate 'search' %}">
               </form>
               <div class="social-icon">
                 <a href=""><i class="fab fa-facebook"></i></a>
@@ -70,7 +92,7 @@
     </section>
     <!-- Start Footer -->
     <footer>
-      Copyright &copy;2021 - Blog All Rights
+      {% translate 'Copyright &copy;2021 - Blog All Rights' %}
         <div class="social-icon">
           <a href=""><i class="fab fa-facebook"></i></a>
           <a href><i class="fab fa-twitter"></i></a>

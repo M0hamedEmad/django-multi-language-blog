@@ -1,0 +1,329 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-02 20:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\dashboard\forms.py:16
+msgid "Write your title here"
+msgstr "اكتب العنوان هنا"
+
+#: .\dashboard\forms.py:20
+msgid "Write content here"
+msgstr "اكتب المحتوى هنا"
+
+#: .\dashboard\forms.py:29 .\dashboard\forms.py:51
+msgid "username"
+msgstr "اسم السمتخدم"
+
+#: .\dashboard\forms.py:30
+msgid "Password"
+msgstr "كلمة السر"
+
+#: .\dashboard\forms.py:31
+msgid "Confirm Password"
+msgstr "تأكيد كلمة المرور"
+
+#: .\dashboard\forms.py:32 .\dashboard\forms.py:52
+msgid "Email"
+msgstr "البريد الالكتروني"
+
+#: .\dashboard\templates\dashboard\account_form.html:7
+#: .\dashboard\templates\dashboard\account_form.html:17
+msgid "create new user"
+msgstr "إنشاء مستخدم جديد"
+
+#: .\dashboard\templates\dashboard\account_form.html:9
+msgid "update account"
+msgstr "تحديث الحساب"
+
+#: .\dashboard\templates\dashboard\account_form.html:12
+msgid "back to account"
+msgstr "العودة الى الحساب"
+
+#: .\dashboard\templates\dashboard\account_form.html:19
+msgid "update account ID"
+msgstr "تحديث الحساب "
+
+#: .\dashboard\templates\dashboard\account_form.html:26
+#: .\dashboard\templates\dashboard\category_form.html:17
+#: .\dashboard\templates\dashboard\post_form.html:39
+msgid "save"
+msgstr "حفظ"
+
+#: .\dashboard\templates\dashboard\account_list.html:5
+msgid "accounts list"
+msgstr "قائمة الحسابات"
+
+#: .\dashboard\templates\dashboard\account_list.html:6
+msgid "create new account"
+msgstr "انشاء حساب جديد"
+
+#: .\dashboard\templates\dashboard\account_list.html:12
+msgid "id"
+msgstr "رقم تعريفي"
+
+#: .\dashboard\templates\dashboard\account_list.html:13
+msgid "UserName"
+msgstr "اسم المستخدم"
+
+#: .\dashboard\templates\dashboard\account_list.html:14
+msgid "Fist Name"
+msgstr "الاسم الاول"
+
+#: .\dashboard\templates\dashboard\account_list.html:15
+msgid "Last Name"
+msgstr "الاسم الاخر"
+
+#: .\dashboard\templates\dashboard\account_list.html:16
+msgid "Email Address"
+msgstr "البريد الالكتروني"
+
+#: .\dashboard\templates\dashboard\account_list.html:17
+msgid "Status"
+msgstr "الحالة"
+
+#: .\dashboard\templates\dashboard\account_list.html:18
+msgid "Date joined"
+msgstr "تاريخ الانضمام"
+
+#: .\dashboard\templates\dashboard\account_list.html:19
+#: .\dashboard\templates\dashboard\account_list.html:45
+#: .\dashboard\templates\dashboard\category_list.html:28
+msgid "Update"
+msgstr "تحديث"
+
+#: .\dashboard\templates\dashboard\account_list.html:20
+#: .\dashboard\templates\dashboard\account_list.html:46
+#: .\dashboard\templates\dashboard\category_list.html:29
+msgid "Delete"
+msgstr "حذف"
+
+#: .\dashboard\templates\dashboard\account_list.html:33
+msgid "Super User"
+msgstr "مستخدم فائق"
+
+#: .\dashboard\templates\dashboard\account_list.html:35
+msgid "Staff"
+msgstr "العاملين"
+
+#: .\dashboard\templates\dashboard\account_list.html:37
+msgid "inactive"
+msgstr "غير نشط"
+
+#: .\dashboard\templates\dashboard\account_list.html:39
+msgid "Editor"
+msgstr "محرر"
+
+#: .\dashboard\templates\dashboard\account_list.html:41
+msgid "Member"
+msgstr "عضو"
+
+#: .\dashboard\templates\dashboard\base.html:22
+#: .\dashboard\templates\dashboard\base.html:29
+msgid "dashboard"
+msgstr "لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\base.html:35
+msgid "add new post"
+msgstr "اضافة مشاركة جديدة"
+
+#: .\dashboard\templates\dashboard\base.html:41
+msgid "posts"
+msgstr "مشاركات"
+
+#: .\dashboard\templates\dashboard\base.html:47
+#: .\dashboard\templates\dashboard\post_list.html:14
+msgid "categories"
+msgstr "الفئات"
+
+#: .\dashboard\templates\dashboard\base.html:53
+msgid "comments"
+msgstr "تعليقات"
+
+#: .\dashboard\templates\dashboard\base.html:59
+msgid "profile"
+msgstr "ملف شخصي"
+
+#: .\dashboard\templates\dashboard\base.html:66
+msgid "users"
+msgstr "مستخدمين"
+
+#: .\dashboard\templates\dashboard\base.html:76
+msgid "search for something"
+msgstr "ابحث عن شيء ما"
+
+#: .\dashboard\templates\dashboard\base.html:85
+msgid "admin"
+msgstr "مشرف"
+
+#: .\dashboard\templates\dashboard\category_form.html:7
+msgid "create new category"
+msgstr "إنشاء فئة جديدة"
+
+#: .\dashboard\templates\dashboard\category_form.html:9
+msgid "update category"
+msgstr "تحيديث الفئة"
+
+#: .\dashboard\templates\dashboard\category_form.html:16
+#: .\dashboard\templates\dashboard\category_list.html:8
+msgid "write category name here"
+msgstr "اكتب اسم الفئة هنا"
+
+#: .\dashboard\templates\dashboard\category_list.html:9
+msgid "add category"
+msgstr "اضافة تحديث"
+
+#: .\dashboard\templates\dashboard\category_list.html:16
+#, fuzzy
+#| msgid "username"
+msgid "name"
+msgstr "اسم السمتخدم"
+
+#: .\dashboard\templates\dashboard\category_list.html:17
+msgid "category number"
+msgstr "رقم الفئة"
+
+#: .\dashboard\templates\dashboard\category_list.html:18
+#: .\dashboard\templates\dashboard\post_list.html:21
+#: .\dashboard\templates\dashboard\post_list.html:55
+msgid "update"
+msgstr "تحديث"
+
+#: .\dashboard\templates\dashboard\category_list.html:19
+#: .\dashboard\templates\dashboard\comment_list.html:15
+#: .\dashboard\templates\dashboard\comment_list.html:25
+#: .\dashboard\templates\dashboard\confirm_delete.html:6
+#: .\dashboard\templates\dashboard\post_list.html:20
+#: .\dashboard\templates\dashboard\post_list.html:56
+msgid "delete"
+msgstr "حذف"
+
+#: .\dashboard\templates\dashboard\category_list.html:20
+#: .\dashboard\templates\dashboard\category_list.html:30
+msgid "see category"
+msgstr "انظر الفئة"
+
+#: .\dashboard\templates\dashboard\comment_list.html:5
+msgid "comments list"
+msgstr "قائمة التعليقات"
+
+#: .\dashboard\templates\dashboard\comment_list.html:11
+msgid "author"
+msgstr "كاتب"
+
+#: .\dashboard\templates\dashboard\comment_list.html:12
+msgid "comment"
+msgstr "تعليق"
+
+#: .\dashboard\templates\dashboard\comment_list.html:13
+#, fuzzy
+#| msgid "posts"
+msgid "post"
+msgstr "مشاركات"
+
+#: .\dashboard\templates\dashboard\comment_list.html:14
+msgid "created at"
+msgstr "تم انشائه في"
+
+#: .\dashboard\templates\dashboard\confirm_delete.html:9
+msgid "Are You Sure You Want Delete"
+msgstr "هل أنت متأكد أنك تريد حذف"
+
+#: .\dashboard\templates\dashboard\confirm_delete.html:23
+msgid "no"
+msgstr "لأ"
+
+#: .\dashboard\templates\dashboard\post_form.html:9
+msgid "new post"
+msgstr "مشاركة جديدة"
+
+#: .\dashboard\templates\dashboard\post_form.html:15
+msgid "create new post"
+msgstr "انشاء مشاركة جديدة"
+
+#: .\dashboard\templates\dashboard\post_form.html:17
+msgid "Home"
+msgstr "الفحة الرئيسية"
+
+#: .\dashboard\templates\dashboard\post_form.html:18
+msgid "Dashboard"
+msgstr "لوحة التحكم"
+
+#: .\dashboard\templates\dashboard\post_form.html:32
+msgid "add new category"
+msgstr "اضافة فئة جديد"
+
+#: .\dashboard\templates\dashboard\post_list.html:5
+msgid "posts list"
+msgstr "قائمة المشاركات"
+
+#: .\dashboard\templates\dashboard\post_list.html:6
+msgid "add post"
+msgstr "انشاء مشاركة جديدة"
+
+#: .\dashboard\templates\dashboard\post_list.html:12
+msgid "title"
+msgstr "عنوان"
+
+#: .\dashboard\templates\dashboard\post_list.html:13
+msgid "editor"
+msgstr "محرر"
+
+#: .\dashboard\templates\dashboard\post_list.html:15
+msgid "views"
+msgstr "مشاهدات"
+
+#: .\dashboard\templates\dashboard\post_list.html:16
+msgid "posted at"
+msgstr "تم انشائة فى"
+
+#: .\dashboard\templates\dashboard\post_list.html:17
+msgid "update at"
+msgstr "تم تحديثة فى"
+
+#: .\dashboard\templates\dashboard\post_list.html:18
+msgid "published at"
+msgstr "نشر في"
+
+#: .\dashboard\templates\dashboard\post_list.html:19
+msgid "stat"
+msgstr "الحالة"
+
+#: .\dashboard\templates\dashboard\post_list.html:43
+#, fuzzy
+#| msgid "add category"
+msgid "no category"
+msgstr "لأ يوجد فئات"
+
+#: .\dashboard\templates\dashboard\post_list.html:51
+msgid "Active"
+msgstr "نشط"
+
+#: .\dashboard\templates\dashboard\post_list.html:53
+msgid "Inactive"
+msgstr "عير نشط"
+
+#: .\dashboard\templates\dashboard\post_list.html:59
+msgid "no posts"
+msgstr "لأ يوحد مشاركات"
+
+#, fuzzy
+#~| msgid "inactive"
+#~ msgid "active"
+#~ msgstr "غير نشط"

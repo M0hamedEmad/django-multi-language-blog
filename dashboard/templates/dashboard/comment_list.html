@@ -1,17 +1,18 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
-  <legend>Comments List</legend>
+  <legend>{% trans 'comments list' %}</legend>
 </div>
 <div class="table">
   <table>
   <thead>
     <tr>
-    <th>Author</th>
-      <th>Comment</th>
-      <th>Post</th>
-      <th>Created at</th>
-      <th>Delete</th>
+      <th>{% trans 'author' %}</th>
+      <th>{% trans 'comment' %}</th>
+      <th>{% trans 'post' %}</th>
+      <th>{% trans 'created at' %}</th>
+      <th>{% trans 'delete' %}</th>
     </tr>
   </thead>
   <tbody>
@@ -19,9 +20,9 @@
       <tr>
         <td>{{comment.user}}</td>
         <td>{{comment.content|truncatewords:"6"}}</td>
-        <td>{{comment.post|truncatewords:"6"}}</td>
+        <td><a href="{% url 'post:post' comment.post.slug %}">{{comment.post|truncatewords:"10"}}</a></td>
         <td>{{comment.created_at|date:'d M Y h:i'}}</td>
-        <td><a href="{% url 'post:delete_comment' comment.id %}" class="btn btn-sm danger">Delete</a></td>
+        <td><a href="{% url 'post:delete_comment' comment.id %}" class="btn btn-sm danger">{% trans 'delete' %}</a></td>
       </tr>
     {% endfor %}      
   </tbody>

@@ -1,0 +1,204 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-02 20:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\account\forms.py:7
+msgid "Email or Username"
+msgstr "البريد الالكتنروني او اسم المستخد"
+
+#: .\account\forms.py:8 .\account\forms.py:13
+msgid "Password"
+msgstr "كلمة السر"
+
+#: .\account\forms.py:11
+msgid "Username"
+msgstr "ساسم المستخدم"
+
+#: .\account\forms.py:12
+msgid "Email"
+msgstr "البريد الالكتروني"
+
+#: .\account\forms.py:14
+msgid "Password confirmation"
+msgstr "تأكيد كلمة السر"
+
+#: .\account\models.py:18
+msgid "user"
+msgstr "المستخدم"
+
+#: .\account\models.py:19
+msgid "image"
+msgstr "صورة"
+
+#: .\account\templates\account\login.html:3
+#: .\account\templates\account\login.html:16
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+#: .\account\templates\account\login.html:8
+msgid "Your account doesn't have access to this page. To proceed,"
+msgstr "حسابك غير مصرح به لدخول هذه الصفحة"
+
+#: .\account\templates\account\login.html:9
+msgid "please login with an account that has access."
+msgstr "سجل الدخول يحساب اخر"
+
+#: .\account\templates\account\login.html:11
+msgid "Please login to see this page."
+msgstr "من فضلك سجل الدخول للذهاب الى هذه الصفحة"
+
+#: .\account\templates\account\login.html:19
+#: .\account\templates\account\register.html:12
+msgid "login"
+msgstr "تسجيل الدخول"
+
+#: .\account\templates\account\login.html:22
+msgid "Lost your Password"
+msgstr "نسيت كلمة السر"
+
+#: .\account\templates\account\login.html:22
+msgid "Reset Your Password"
+msgstr "اعادة تعيين كلمة السر"
+
+#: .\account\templates\account\login.html:23
+msgid "Don"
+msgstr "تم"
+
+#: .\account\templates\account\login.html:23
+#: .\account\templates\account\password_change.html:12
+#: .\account\templates\account\register.html:3
+#: .\account\templates\account\register.html:7
+msgid "Register"
+msgstr "انشاء حساب"
+
+#: .\account\templates\account\password_change.html:3
+#: .\account\templates\account\password_change.html:7
+msgid "Password Change"
+msgstr "تغير كلمة السر"
+
+#: .\account\templates\account\password_change.html:12
+msgid "Back To Login"
+msgstr "الرجوع الى صفحة تسجيل الدخول"
+
+#: .\account\templates\account\password_change_done.html:3
+msgid "Password Change Done"
+msgstr "تم تغير كلمة السر"
+
+#: .\account\templates\account\password_reset.html:3
+msgid "Password Reset"
+msgstr "اعادة تعين كلمة السر"
+
+#: .\account\templates\account\password_reset.html:6
+msgid ""
+"Forgotten your password? Enter your email address below, and we’ll email "
+"instructions for setting a new one."
+msgstr ""
+"هل نسيت كلمة المرور؟ أدخل عنوان بريدك الإلكتروني أدناه ، وسنرسل إليك بريدًا "
+"إلكترونيًاتعليمات لإعداد واحدة جديدة."
+
+#: .\account\templates\account\password_reset.html:10
+#: .\account\templates\account\password_reset.html:13
+msgid "Password reset"
+msgstr "اعادة تعيين كلمة السر"
+
+#: .\account\templates\account\password_reset_complete.html:3
+msgid "Password Reset Compelete"
+msgstr "اكتملت إعادة تعيين كلمة المرور"
+
+#: .\account\templates\account\password_reset_complete.html:5
+msgid "The password has been changed!"
+msgstr "تم تغيير كلمة السر!"
+
+#: .\account\templates\account\password_reset_complete.html:6
+msgid "log in again?"
+msgstr "تسجيل الدخول مرة أخرى؟"
+
+#: .\account\templates\account\password_reset_confirm.html:3
+#: .\account\templates\account\password_reset_done.html:3
+msgid "Password Reset Confirm"
+msgstr "تأكيد إعادة تعيين كلمة المرور"
+
+#: .\account\templates\account\password_reset_confirm.html:13
+msgid "New password:"
+msgstr "كلمة سر جديدة"
+
+#: .\account\templates\account\password_reset_confirm.html:28
+msgid ""
+"\n"
+"            <h1>Password reset failed</h1>\n"
+"            <p>The password reset link was invalid, possibly because it has "
+"already been used. Please request a new password reset.</p>\n"
+"        "
+msgstr ""
+"\n"
+"            <h1>فشل إعادة تعيين كلمة المرور</h1>\n"
+"            <p>رابط إعادة تعيين كلمة المرور غير صالح ، ربما لأنه يحتوي "
+"علىسبق استخدامها. يرجى طلب إعادة تعيين كلمة المرور الجديدة.</p>\n"
+"        "
+
+#: .\account\templates\account\password_reset_done.html:7
+msgid ""
+"<h1>Password reset sent</h1><p>We’ve emailed you instructions for setting "
+"your password, if an account exists with the email you entered. You should "
+"receive them shortly.</p><p>you don’t receive an email, please make sure "
+"you’ve entered the address you registered with, and check your spam folder.</"
+"p>"
+msgstr ""
+"<h1> تم إرسال إعادة تعيين كلمة المرور </ h1> <p> لقد أرسلنا إليك عبر البريد "
+"الإلكتروني إرشادات حول الإعدادكلمة المرور الخاصة بك ، إذا كان هناك حساب "
+"بالبريد الإلكتروني الذي أدخلته. يجب عليكتلقيها قريبًا. </ p> <p> لن تتلقى "
+"بريدًا إلكترونيًا ، يرجى التأكدلقد أدخلت العنوان الذي سجلت به ، وتحقق من مجلد "
+"الرسائل غير المرغوب فيها. </p>"
+
+#: .\account\templates\account\profile.html:3
+msgid "Profile"
+msgstr "الملف الشخصي"
+
+#: .\account\templates\account\profile.html:6
+msgid "User Profile"
+msgstr "الملف الشخصي"
+
+#: .\account\templates\account\profile.html:10
+msgid "person"
+msgstr "صور شخصية"
+
+#: .\account\templates\account\profile.html:14
+msgid "Post"
+msgstr "مشاركة"
+
+#: .\account\templates\account\profile.html:15
+msgid "Comment"
+msgstr "تعليق"
+
+#: .\account\templates\account\profile.html:17
+msgid "Change Password"
+msgstr "تعير كلمة السر"
+
+#: .\account\templates\account\profile.html:21
+msgid "Edit Your Account"
+msgstr "تعديل حسابك"
+
+#: .\account\templates\account\profile.html:24
+msgid "save"
+msgstr "حفظ"
+
+#: .\account\templates\account\register.html:10
+msgid "Sign up"
+msgstr "انشاء حساب"

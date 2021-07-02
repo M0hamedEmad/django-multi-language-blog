@@ -1,11 +1,12 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
   <legend>
-    Delete {{object}}
+    {% trans 'delete' %} {{object}}
   </legend>
 </div>
-<p>Are You Sure You Want Delete '{{object}}'</p>
+<p>{% trans 'Are You Sure You Want Delete' %}'{{object}}'</p>
 <form action="" method="post">
   {% csrf_token %}
   <input type="submit" value="Yes, Delete it" class="btn info">
@@ -19,6 +20,6 @@
   {% else %}
     {% url 'dashboard:accounts' %}
   {% endif %}
-  " class="btn info">No</a>
+  " class="btn info">{% trans 'no' %}</a>
 </form>
 {% endblock content  %}

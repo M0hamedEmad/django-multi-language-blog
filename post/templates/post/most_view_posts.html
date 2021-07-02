@@ -1,5 +1,6 @@
+{% load i18n %}
 {% load static %}
-<h3>Featured</h3>
+<h3>{% trans 'most view posts' %}</h3>
 {% for post in m_posts %}
 <a href="{% url 'post:post' post.slug %}">
 	<article>

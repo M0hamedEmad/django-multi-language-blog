@@ -1,33 +1,33 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
   <legend>Categories List</legend>
   <form action="{% url 'dashboard:create_category' %}" method="post">
       {% csrf_token %}
-      <input type="text" name="name" maxlength="50" required="" id="id_name" class='special' placeholder="Write category name here">
-      <input type="submit" value="Add Category" class="btn info">
+      <input type="text" name="name" maxlength="50" required="" id="id_name" class='special' placeholder="{% trans 'write category name here' %}">
+      <input type="submit" value="{% trans 'add category' %}" class="btn info">
   </form>
 </div>
 <div class="table">
   <table>
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Posts number</th>
-      <th>Update</th>
-      <th>Delete</th>
-      <th>See Posts</th>
+      <th>{% trans 'name' %}</th>
+      <th>{% trans 'category number' %}</th>
+      <th>{% trans 'update' %}</th>
+      <th>{% trans 'delete' %}</th>
+      <th>{% trans 'see category' %}</th>
     </tr>
   </thead>
   <tbody>
     {% for category in categories %}
       <tr>
-
         <td>{{category.name}}</td>
         <td>{{category.post_set.all.count}}</td>
-        <td><a href="{% url 'dashboard:update_category' category.id %}" class="btn btn-sm warning">Update</a></td>
-        <td><a href="{% url 'dashboard:delete_category' category.id %}" class="btn btn-sm danger">Delete</a></td>
-        <td><a class="btn btn-sm info" href="{% url 'post:home' %}?category={{category}}">See Posts</a></td>
+        <td><a href="{% url 'dashboard:update_category' category.id %}" class="btn btn-sm warning">{% trans 'Update' %}</a></td>
+        <td><a href="{% url 'dashboard:delete_category' category.id %}" class="btn btn-sm danger">{% trans 'Delete' %}</a></td>
+        <td><a class="btn btn-sm info" href="{% url 'post:home' %}?category={{category}}">{% trans 'see category' %}</a></td>
       </tr>
     {% endfor %}      
   </tbody>

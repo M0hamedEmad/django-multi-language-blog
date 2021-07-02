@@ -1,0 +1,148 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-07-02 20:22+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\post\models.py:18
+msgid "name"
+msgstr "الاسم"
+
+#: .\post\models.py:21
+msgid "category"
+msgstr "الفئة"
+
+#: .\post\models.py:22 .\post\models.py:36
+msgid "categories"
+msgstr "الفئات"
+
+#: .\post\models.py:29
+msgid "Active"
+msgstr "نشط"
+
+#: .\post\models.py:30
+msgid "Inactive"
+msgstr "غير نشط"
+
+#: .\post\models.py:33
+msgid "author"
+msgstr "كاتب"
+
+#: .\post\models.py:34
+msgid "title"
+msgstr "عنوان"
+
+#: .\post\models.py:35 .\post\models.py:77
+msgid "content"
+msgstr "محتوي"
+
+#: .\post\models.py:37
+msgid "image"
+msgstr "صورة"
+
+#: .\post\models.py:38 .\post\models.py:79
+#, fuzzy
+#| msgid "related posts"
+msgid "created at"
+msgstr "مشاركات متشابهة"
+
+#: .\post\models.py:39 .\post\models.py:80
+msgid "updated at"
+msgstr "تم التحديث في"
+
+#: .\post\models.py:40
+msgid "published at"
+msgstr "تم النشر في"
+
+#: .\post\models.py:41
+#, fuzzy
+#| msgid "views"
+msgid "views count"
+msgstr "مرات المشاهدة"
+
+#: .\post\models.py:42 .\post\models.py:81
+msgid "active"
+msgstr "نشط"
+
+#: .\post\models.py:76
+msgid "user"
+msgstr "مستخدم"
+
+#: .\post\models.py:78
+msgid "post"
+msgstr "مشاركة"
+
+#: .\post\templates\post\comment_confirm_delete.html:4
+msgid "are you sure you want to delete comment"
+msgstr "هل انت متأكد انك تريد حذف التعليق"
+
+#: .\post\templates\post\comment_confirm_delete.html:7
+msgid "yes delete"
+msgstr "نعم احذف"
+
+#: .\post\templates\post\comment_confirm_delete.html:8
+msgid "No"
+msgstr "لأ"
+
+#: .\post\templates\post\most_view_posts.html:3
+msgid "most view posts"
+msgstr "الاكتر مشاهدة"
+
+#: .\post\templates\post\pagination.html:3
+msgid "page"
+msgstr "صفحة"
+
+#: .\post\templates\post\pagination.html:3
+msgid "of"
+msgstr "من"
+
+#: .\post\templates\post\post.html:10
+#, python-format
+msgid "%(views)s views "
+msgstr "%(views)s مشاهده"
+
+#: .\post\templates\post\post.html:36
+msgid "related posts"
+msgstr "مشاركات متشابهة"
+
+#: .\post\templates\post\post.html:50
+msgid "no related posts"
+msgstr "لأ يوجد مشاركات متشابهة"
+
+#: .\post\templates\post\post.html:55
+msgid "comments"
+msgstr "التعليقات"
+
+#: .\post\templates\post\post.html:70
+msgid "delete"
+msgstr "حذف"
+
+#: .\post\templates\post\post.html:80
+msgid "write comment"
+msgstr "اكتب تعليق"
+
+#: .\post\templates\post\post.html:83
+msgid "post comment"
+msgstr "نشر تعليق"
+
+#: .\post\templates\post\post.html:87
+#, python-format
+msgid ""
+"you are not logged in, please<a href=\"%(login)s\">login</a> and leave a "
+"comment."
+msgstr "يجب عليك <a href=\"%(login)s\">تسجيل الدخول</a> لكتابة تعليق    "

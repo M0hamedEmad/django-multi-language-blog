@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
 from dashboard.decorators import get_or_create_editor_admin_group
 from PIL import Image
 
@@ -14,8 +15,8 @@ def upload_image(instance, image_name):
     
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    picture = models.ImageField(default='profile_pics/default.jpg', upload_to=upload_image, null=True, blank=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, verbose_name=_('user'))
+    picture = models.ImageField(_('image'), default='profile_pics/default.jpg', upload_to=upload_image, null=True, blank=True)
     
     @property    
     def is_admin(self):        

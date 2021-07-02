@@ -1,23 +1,25 @@
 {% extends 'account/account_base.html' %}
+{% load i18n %}
+{% block title %}{% trans 'Login' %}{% endblock title %}
 {% block content %}
   <div class="form">
     {% if next %}
       {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
+        <p>{% trans "Your account doesn't have access to this page. To proceed," %}</p>
+        <p>{% trans 'please login with an account that has access.' %}</p>
       {% else %}
-        <p>Please login to see this page.</p>
+        <p>{% trans 'Please login to see this page.' %}</p>
       {% endif %}
     {% endif %}
 
     <form method="post" class="account">
-      <legend>Login</legend>
+      <legend>{% trans 'Login' %}</legend>
       {% csrf_token %}
       {{form}}
-      <input type="submit" value="login" />
+      <input type="submit" value="{% trans 'login' %}" />
       <input type="hidden" name="next" value="{{ next }}" />
     </form>
-    <p class="af-form">Lost your Password <a href="{% url 'password_reset' %}">Reset Your Password</a></p>
-    <p class="af-form">Don't have account<a href="{% url 'register' %}"> Register</a></p>
+    <p class="af-form">{% trans 'Lost your Password' %} <a href="{% url 'password_reset' %}">{% trans 'Reset Your Password' %}</a></p>
+    <p class="af-form">{% trans 'Don't have account' %} <a href="{% url 'register' %}">{% trans 'Register' %}</a></p>
   </div>
 {% endblock content %}

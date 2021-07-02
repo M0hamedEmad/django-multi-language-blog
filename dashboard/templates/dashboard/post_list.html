@@ -1,63 +1,64 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
-			<div class="content-header">
-				<legend>Posts List</legend>
-				<a href="{% url 'dashboard:post_create' %}" class="btn info">Add Post</a>
-			</div>
-			<div class="table">
-				<table>
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Editor</th>
-						<th>Categories</th>
-						<th>Views</th>
-						<th>Posted at</th>
-						<th>Update at</th>
-						<th>Published at</th>
-						<th>active</th>
-						<th>Delete</th>
-						<th>Update</th>
-					</tr>
-				</thead>
-				<tbody>
-                    {% for post in posts %}
-					<tr>
-						<td>
-                            <a href="{% url 'post:post' post.slug %}">
-                                {{post.title|slice:'10'}}
-                                {% if post.title|length > 10 %}
-                                ...
-                                {% endif %}
-                            </a>
-                        </td>
-						<td>{{post.author}}</td>
-						<td>
-                            {% for category in post.categories.all %}
-                                <a href="{% url 'post:home'%}?category={{category}}">{{category}}</a>
-                                {% if not forloop.last %}
-                                ,
-                                {% endif %}
-                                {% empty %}
-                                    No Category
-                            {% endfor %}
-                        </td>
-						<td>{{post.views_count}}</td>
-						<td>{{post.created_at|date:'d M Y h:m'}}</td>
-						<td>{{post.updated_at|date:'d M Y h:m'}}</td>
-						<td>{{post.published_at|date:'d M Y h:m'}}</td>
-                        {% if post.active %}
-						<td><div class="btn btn-sm info">Active</div></td>
-                        {% else %}
-						<td><div class="btn btn-sm warning">Inactive</div></td>
-                        {% endif %}
-						<td><a href="{% url 'dashboard:post_update' post.slug %}"><div class="btn btn-sm warning">Update</div></a></td>
-						<td><a href="{% url 'dashboard:post_delete' post.slug %}"><div class="btn btn-sm danger">Delete</div></a></td>
-					</tr>
-                    {% empty %}
-                        <p>No Posts</p>
-                    {% endfor %}
-				</tbody>
-				</table>				
-			</div>
+	<div class="content-header">
+		<legend>{% trans 'posts list' %}</legend>
+		<a href="{% url 'dashboard:post_create' %}" class="btn info">{% trans 'add post' %}</a>
+	</div>
+	<div class="table">
+		<table>
+		<thead>
+			<tr>
+				<th>{% trans 'title' %}</th>
+				<th>{% trans 'editor' %}</th>
+				<th>{% trans 'categories' %}</th>
+				<th>{% trans 'views' %}</th>
+				<th>{% trans 'posted at' %}</th>
+				<th>{% trans 'update at' %}</th>
+				<th>{% trans 'published at' %}</th>
+				<th>{% trans 'stat' %}</th>
+				<th>{% trans 'delete' %}</th>
+				<th>{% trans 'update' %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts %}
+			<tr>
+				<td>
+					<a href="{% url 'post:post' post.slug %}">
+						{{post.title|slice:'10'}}
+						{% if post.title|length > 10 %}
+						...
+						{% endif %}
+					</a>
+				</td>
+				<td>{{post.author}}</td>
+				<td>
+					{% for category in post.categories.all %}
+						<a href="{% url 'post:home'%}?category={{category}}">{{category}}</a>
+						{% if not forloop.last %}
+						,
+						{% endif %}
+						{% empty %}
+							{% trans 'no category' %}
+					{% endfor %}
+				</td>
+				<td>{{post.views_count}}</td>
+				<td>{{post.created_at|date:'d M Y h:m'}}</td>
+				<td>{{post.updated_at|date:'d M Y h:m'}}</td>
+				<td>{{post.published_at|date:'d M Y h:m'}}</td>
+				{% if post.active %}
+				<td><div class="btn btn-sm info">{% trans 'Active' %}</div></td>
+				{% else %}
+				<td><div class="btn btn-sm warning">{% trans 'Inactive' %}</div></td>
+				{% endif %}
+				<td><a href="{% url 'dashboard:post_update' post.slug %}"><div class="btn btn-sm warning">{% trans 'update' %}</div></a></td>
+				<td><a href="{% url 'dashboard:post_delete' post.slug %}"><div class="btn btn-sm danger">{% trans 'delete' %}</div></a></td>
+			</tr>
+			{% empty %}
+				<p>{% trans 'no posts' %}</p>
+			{% endfor %}
+		</tbody>
+		</table>				
+	</div>
 {% endblock content  %}

@@ -1,3 +1,4 @@
+{% load i18n %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,16 +6,16 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>New Post</title>
+	<title>{% trans 'new post' %}</title>
 	<link rel="stylesheet" href="{% static 'dashboard/css/new_post.css' %}">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	</head>
 <body>
 	<header>
-		<h2>Create New Post</h2>
+		<h2>{% trans 'create new post' %}</h2>
 		<ul>
-			<li><a href="{% url 'post:home' %}">Home</a></li>
-			<li><a href="{% url 'dashboard:posts' %}">Dashboard</a></li>
+			<li><a href="{% url 'post:home' %}">{% trans 'Home' %}</a></li>
+			<li><a href="{% url 'dashboard:posts' %}">{% trans 'Dashboard' %}</a></li>
 		</ul>
 	</header>
 	<div class="new-form">
@@ -28,14 +29,14 @@
 				<div class="col">
 					<label for="id_categories">{{form.categories.label}}</label>
 					{{form.categories}}
-					<a href="{% url 'dashboard:create_category' %}">Add New Category</a>
+					<a href="{% url 'dashboard:create_category' %}">{% trans 'add new category' %}</a>
 					<label for="id_published_at">{{form.published_at.label}}</label>					
 					{{form.published_at}}
 					<label for="id_image">{{form.image.label}}</label>					
 					{{form.image}}
 					<label for="id_active">{{form.active.label}}</label>					
 					{{form.active}}
-						<input type="submit" value="Save">
+						<input type="submit" value="{% trans 'save' %}">
 				</div>
 				<div class="content">
 					{{form.title}}

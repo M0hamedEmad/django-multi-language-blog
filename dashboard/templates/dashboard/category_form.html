@@ -1,18 +1,19 @@
 {% extends 'dashboard/base.html' %}
+{% load i18n %}
 {% block content %}
 <div class="content-header">
   <legend>
     {% if 'create' in request.path %}
-      Create New Categoy
+      {% trans 'create new category' %}
     {% else %}
-      Update "{{category}}"
+      {% trans 'update category' %} "{{category}}"
     {% endif %}
   </legend>
-  <a href="{% url 'dashboard:categories' %}" class="btn info">Back To Categories</a>
+  <a href="{% url 'dashboard:categories' %}" class="btn info">{% trans 'back to categories %}</a>
 </div>
 <form action="" method="post">
   {% csrf_token %}
-  <input type="text" name="name" maxlength="50" required="" id="id_name" class='special' placeholder="Write category name here" value='{{category}}'>
-  <input type="submit" value="Add Category" class="btn info">
+  <input type="text" name="name" maxlength="50" required="" id="id_name" class='special' placeholder="{% trans 'write category name here' %}" value='{{category}}'>
+  <input type="submit" value="{% trans 'save' %}" class="btn info">
 </form>
 {% endblock content  %}

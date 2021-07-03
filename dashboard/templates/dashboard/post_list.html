@@ -12,10 +12,10 @@
 				<th>{% trans 'title' %}</th>
 				<th>{% trans 'editor' %}</th>
 				<th>{% trans 'categories' %}</th>
+				<th>{% trans 'languages' %}</th>
 				<th>{% trans 'views' %}</th>
-				<th>{% trans 'posted at' %}</th>
-				<th>{% trans 'update at' %}</th>
 				<th>{% trans 'published at' %}</th>
+				<th>{% trans 'add translate' %}</th>
 				<th>{% trans 'stat' %}</th>
 				<th>{% trans 'delete' %}</th>
 				<th>{% trans 'update' %}</th>
@@ -26,27 +26,32 @@
 			<tr>
 				<td>
 					<a href="{% url 'post:post' post.slug %}">
-						{{post.title|slice:'10'}}
-						{% if post.title|length > 10 %}
+						{{post.get_title|slice:'6'}}
+						{% if post.get_title|length > 6 %}
 						...
 						{% endif %}
 					</a>
 				</td>
 				<td>{{post.author}}</td>
 				<td>
-					{% for category in post.categories.all %}
-						<a href="{% url 'post:home'%}?category={{category}}">{{category}}</a>
+					{% for category in post.get_categories.all %}
+						<a href="{% url 'post:home'%}?category={{category}}">{{category|slice:'6'}}</a>
 						{% if not forloop.last %}
 						,
 						{% endif %}
 						{% empty %}
 							{% trans 'no category' %}
 					{% endfor %}
-				</td>
+				</td>		
+				<td>
+					<a href="{% url 'post:post' post.slug %}">{{post.language}}</a>
+					{% for post_lan in post.post_lang.all %}
+						, <a href="/{{post_lan.language}}/{{post.slug}}">{{post_lan.language}}</a>
+					{% endfor %}
+				</td>						
 				<td>{{post.views_count}}</td>
-				<td>{{post.created_at|date:'d M Y h:m'}}</td>
-				<td>{{post.updated_at|date:'d M Y h:m'}}</td>
-				<td>{{post.published_at|date:'d M Y h:m'}}</td>
+				<td>{{post.published_at|date:'d M Y'}}</td>
+				<td><a href="{% url 'dashboard:post_language_create' post.id %}" class="btn btn-sm info">{% trans 'Add Translate' %}</a></td>
 				{% if post.active %}
 				<td><div class="btn btn-sm info">{% trans 'Active' %}</div></td>
 				{% else %}

@@ -58,27 +58,6 @@ class PostDetail(FormMixin, DetailView):
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
         return queryset
     
-    # def get_object(self):
-    
-    #     queryset = self.get_queryset()
-    #     slug = self.kwargs.get(self.slug_url_kwarg)
-    #     obj = get_object_or_404(queryset, slug=slug)
-        
-    #     try:
-    #         lang = Language.objects.filter(code=get_language()).get()
-    #     except:
-    #         return obj
-        
-    #     if lang == obj.language:
-    #         return obj
-    #     else:
-    #         l_post = obj.post_lang.filter(language=lang)
-    #         if l_post.exists():
-    #             obj = l_post.get()
-    #         return obj
-      
-    #     return obj
-    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()

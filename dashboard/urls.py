@@ -4,6 +4,10 @@ from  .views import (
     PostCreateView,
     PostUpdateView,
     PostDeleteView,
+    PostLanguageListView,
+    PostLanguageCreateView,
+    PostLanguageUpdateView,
+    PostLanguageDeleteView,
     CategoryListView,
     CategoryCreateView,
     CategoryUpdateView,
@@ -13,6 +17,10 @@ from  .views import (
     AccountCreateView,
     AccountUpdateView,
     AccountDeleteView,
+    LanguageListView,
+    LanguageCreateView,
+    LanguageUpdateView,
+    LanguageDeleteView,
     )
 
 app_name = 'dashboard'
@@ -23,6 +31,11 @@ urlpatterns = [
     path('post/create/', PostCreateView.as_view(), name='post_create'),
     path('post/update/<slug:slug>/', PostUpdateView.as_view(), name='post_update'),
     path('post/delete/<slug:slug>/', PostDeleteView.as_view(), name='post_delete'),
+    
+    path('posts/translation/', PostLanguageListView.as_view(), name='posts_language'),
+    path('post/add/translation/<int:id>/', PostLanguageCreateView.as_view(), name='post_language_create'),
+    path('post/update/translation/<int:pk>/', PostLanguageUpdateView.as_view(), name='post_language_update'),
+    path('post/delete/translation/<int:pk>/', PostLanguageDeleteView.as_view(), name='post_language_delete'),
     
     # Categories Urls
     path('category/', CategoryListView.as_view(), name='categories'),
@@ -38,5 +51,11 @@ urlpatterns = [
     path('account/create/', AccountCreateView.as_view(), name='accounts_create'),
     path('account/update/<int:pk>/', AccountUpdateView.as_view(), name='accounts_update'),
     path('account/delete/<int:pk>/', AccountDeleteView.as_view(), name='accounts_delete'),
+        
+    # Language Urls
+    path('languages/', LanguageListView.as_view(), name='languages'),
+    path('languages/create/', LanguageCreateView.as_view(), name='create_language'),
+    path('languages/update/<int:pk>/', LanguageUpdateView.as_view(), name='update_language'),
+    path('languages/delete/<int:pk>/', LanguageDeleteView.as_view(), name='delete_language'),
     
 ]

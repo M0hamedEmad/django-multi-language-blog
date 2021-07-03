@@ -1,0 +1,57 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{% block content %}
+	<div class="content-header">
+		<legend>{% trans 'posts list' %}</legend>
+	</div>
+	<div class="table">
+		<table>
+		<thead>
+			<tr>
+				<th>{% trans 'title' %}</th>
+				<th>{% trans 'editor' %}</th>
+				<th>{% trans 'categories' %}</th>
+				<th>{% trans 'languages' %}</th>
+				<th>{% trans 'stat' %}</th>
+				<th>{% trans 'delete' %}</th>
+				<th>{% trans 'update' %}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts %}
+			<tr>
+				<td>
+					<a href="{% url 'post:post' post.post.slug %}">
+						{{post.title|slice:'6'}}
+						{% if post.get_title|length > 6 %}
+						...
+						{% endif %}
+					</a>
+				</td>
+				<td>{{post.post.author}}</td>
+				<td>
+					{% for category in post.categories.all %}
+						<a href="{% url 'post:home' %}?category={{category}}">{{category|slice:'6'}}</a>
+						{% if not forloop.last %}
+						,
+						{% endif %}
+						{% empty %}
+							{% trans 'no category' %}
+					{% endfor %}
+				</td>		
+                <td>{{post.language}}</td>
+				{% if post.active %}
+				<td><div class="btn btn-sm info">{% trans 'Active' %}</div></td>
+				{% else %}
+				<td><div class="btn btn-sm warning">{% trans 'Inactive' %}</div></td>
+				{% endif %}
+				<td><a href="{% url 'dashboard:post_language_update' post.id %}"><div class="btn btn-sm warning">{% trans 'update' %}</div></a></td>
+				<td><a href="{% url 'dashboard:post_language_delete' post.id %}"><div class="btn btn-sm danger">{% trans 'delete' %}</div></a></td>
+			</tr>
+			{% empty %}
+				<p>{% trans 'no posts' %}</p>
+			{% endfor %}
+		</tbody>
+		</table>				
+	</div>
+{% endblock content  %}

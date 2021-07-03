@@ -5,9 +5,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.utils.decorators import method_decorator
-from post.models import Post, Comment, Category
-from .forms import CategoryForm, UserForm, UserUpdateForm, ProfileForm, PostForm
 from .decorators import admin_and_editor_only, admin_only
+from .forms import CategoryForm, UserForm, UserUpdateForm, ProfileForm, PostForm, PostLanguageForm
+from post.models import Post, Comment, Category, PostLanguage, Language
 from account.models import Profile
 
 # Posts Views
@@ -23,7 +23,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'dashboard/post_form.html'
     form_class = PostForm
-    success_url = reverse_lazy('dashboard:posts')
     post_slug = None
 
     def form_valid(self, form):
@@ -37,6 +36,43 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     
     def get_success_url(self):
         return reverse('post:post', kwargs={'slug':self.post_slug})
+
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostLanguageListView(LoginRequiredMixin, ListView):
+    model = PostLanguage
+    template_name = 'dashboard/posts_lang_lish.html'
+    context_object_name = 'posts'
+
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostDeleteView(LoginRequiredMixin, DeleteView):
+    model = Post
+    template_name = 'dashboard/confirm_delete.html'
+    success_url = reverse_lazy('dashboard:posts')     
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
+        return super().delete(request, *args, **kwargs)
+
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostLanguageCreateView(LoginRequiredMixin, CreateView):
+    model = PostLanguage
+    template_name = 'dashboard/post_form.html'
+    form_class = PostLanguageForm
+    success_url = reverse_lazy('dashboard:posts')
+    post_slug = None
+
+    def get_form(self):
+        form = PostLanguageForm(initial={'post':self.kwargs.get('id'), 'language':'1'})
+        
+        if self.request.method == 'POST':
+            form = PostLanguageForm(self.request.POST)
+    
+        return form
+
+        
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.title}" has been created successfully')
+        return super().form_valid(form)
 
 @method_decorator(admin_and_editor_only, name='dispatch')
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -57,6 +93,36 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         
     def get_success_url(self):
         return reverse('post:post', kwargs={'slug':self.post_slug})    
+
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostLanguageUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = PostLanguage
+    template_name = 'dashboard/post_form.html'
+    form_class = PostLanguageForm
+    post_slug = None
+    
+    def test_func(self):
+        return self.request.user.is_superuser or self.get_object().post.author == self.request.user
+    
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.title}" has been updated successfully')
+        post = form.save()
+        self.post_slug = post.post.slug
+        return super().form_valid(form)    
+        
+    def get_success_url(self):
+        return reverse('post:post', kwargs={'slug':self.post_slug})    
+
+@method_decorator(admin_and_editor_only, name='dispatch')
+class PostLanguageDeleteView(LoginRequiredMixin, DeleteView):
+    model = PostLanguage
+    template_name = 'dashboard/confirm_delete.html'
+    success_url = reverse_lazy('dashboard:posts')     
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
+        return super().delete(request, *args, **kwargs)
+
 
 @method_decorator(admin_and_editor_only, name='dispatch')
 class PostDeleteView(LoginRequiredMixin, DeleteView):
@@ -191,3 +257,44 @@ class AccountDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("dashboard:accounts")        
     
     
+# Language
+@method_decorator(admin_and_editor_only, name='dispatch')
+class LanguageListView(LoginRequiredMixin, ListView):
+    model = Language
+    template_name = 'dashboard/language_list.html'
+    context_object_name = 'languages'
+    
+@method_decorator(admin_and_editor_only, name='dispatch')
+class LanguageCreateView(LoginRequiredMixin, CreateView):
+    model = Language
+    fields = ['name', 'code']
+    template_name = 'dashboard/language_form.html'
+    success_url = reverse_lazy('dashboard:languages')
+    
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.name}" has been created successfully')
+        return super().form_valid(form)
+    
+@method_decorator(admin_and_editor_only, name='dispatch')
+class LanguageUpdateView(LoginRequiredMixin, UpdateView):
+    model = Language
+    context_object_name = 'language'
+    fields = ['name', 'code']
+    template_name = 'dashboard/language_form.html'
+    success_url = reverse_lazy('dashboard:languages')
+    
+    
+    def form_valid(self, form):
+        messages.success(self.request, f'"{form.instance.name}" has been updated successfully')
+        return super().form_valid(form)
+        
+@method_decorator(admin_and_editor_only, name='dispatch')    
+class LanguageDeleteView(LoginRequiredMixin, DeleteView):
+    model = Language
+    template_name = 'dashboard/confirm_delete.html'
+    success_url = reverse_lazy('dashboard:languages')     
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, f'"{self.get_object()}" has been deleted successfully')
+        return super().delete(request, *args, **kwargs)
+        

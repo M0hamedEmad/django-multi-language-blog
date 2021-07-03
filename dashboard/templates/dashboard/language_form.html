@@ -1,0 +1,18 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="content-header">
+  <legend>
+    {% if 'create' in request.path %}
+      {% trans 'create new language' %}
+    {% else %}
+      {% trans 'update language' %} "{{language}}"
+    {% endif %}
+  </legend>
+</div>
+<form action="" method="post" class="special">
+  {% csrf_token %}
+  {{form}}
+  <input type="submit" value="{% trans 'save' %}" class="btn info">
+</form>
+{% endblock content  %}

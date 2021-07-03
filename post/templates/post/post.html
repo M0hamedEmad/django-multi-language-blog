@@ -3,7 +3,11 @@
 {% load static %}
 {% block content %}
 <div class="post">
-	<article>
+<article>
+	        {% get_current_language as LANGUAGE_CODE %}
+        {% if post.get_language_code != LANGUAGE_CODE %}
+          <p class="no-translate">{% translate 'There is no translation for this article' %}</p>
+        {% endif %}
   <div class="post-header">
 		<div class="header">
 			<h1>{{post.get_title}}</h1>

@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="content-header">
+  <legend>Language List</legend>
+    <a href="{% url 'dashboard:create_language' %}"  class="btn info" >create language</a>
+</div>
+<div class="table">
+  <table>
+  <thead>
+    <tr>
+      <th>{% trans 'name' %}</th>
+      <th>{% trans 'code' %}</th>
+      <th>{% trans 'update' %}</th>
+      <th>{% trans 'delete' %}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for language in languages %}
+      <tr>
+        <td>{{language.name}}</td>
+        <td>{{language.code}}</td>
+        <td><a href="{% url 'dashboard:update_language' language.id %}" class="btn btn-sm warning">{% trans 'Update' %}</a></td>
+        <td><a href="{% url 'dashboard:delete_language' language.id %}" class="btn btn-sm danger">{% trans 'Delete' %}</a></td>
+      </tr>
+    {% endfor %}      
+  </tbody>
+  </table>				
+</div>
+{% endblock content  %}

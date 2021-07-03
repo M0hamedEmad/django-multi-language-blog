@@ -1,13 +1,13 @@
 from django import forms
 from django.contrib.auth.models import User, Group
 from django.utils.translation import ugettext_lazy as _
-from post.models import Post, Comment, Category
+from post.models import Post, Comment, Category, PostLanguage
 from account.models import Profile
 
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ('title', 'content', 'categories', 'image', 'active', 'published_at',)       
+        fields = ('title', 'content', 'categories', 'image', 'language', 'active', 'published_at',)       
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,6 +19,22 @@ class PostForm(forms.ModelForm):
         self.fields['content'].widget.attrs = {
             'placeholder':_('Write content here')
         }
+
+class PostLanguageForm(forms.ModelForm):
+    class Meta:
+        model = PostLanguage
+        fields = ('title', 'content', 'categories', 'active', 'post', 'language')       
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.fields['title'].widget.attrs = {
+            'placeholder':_('Write your title here')
+        }
+        
+        self.fields['content'].widget.attrs = {
+            'placeholder':_('Write content here')
+        }         
             
 class CategoryForm(forms.ModelForm):
     class Meta:

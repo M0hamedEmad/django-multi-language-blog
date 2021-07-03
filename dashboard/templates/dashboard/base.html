@@ -1,5 +1,6 @@
-{% load static %}
 {% load i18n %}
+{% get_current_language_bidi as LANGUAGE_BIDI %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,6 +12,10 @@
     <link rel="stylesheet" href="css/all.min.css">
 	<!-- Main Template Css File -->
 	<link rel="stylesheet" href="{% static 'dashboard/css/dashboard.css' %}">
+	{% if LANGUAGE_BIDI %}
+		<!-- rtl Template Css File -->
+		<link rel="stylesheet" href="{% static 'css/rtl.css' %}">
+	{% endif %}	
 	<!-- Google Fonts -->
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link 
@@ -42,11 +47,23 @@
 				</a>
 			</li>
 			<li>
+				<a href="{% url 'dashboard:posts_language' %}">
+					<i class="fas fa-list"></i>
+					<p>{% trans 'translated posts' %}</p>
+				</a>
+			</li>			
+			<li>
 				<a href="{% url 'dashboard:categories' %}">
 					<i class="fas fa-list"></i>
 					<p>{% trans 'categories' %}</p>
 				</a>
-			</li>				
+			</li>
+			<li>
+				<a href="{% url 'dashboard:languages' %}">
+					<i class="fas fa-list"></i>
+					<p>{% trans 'languages' %}</p>
+				</a>
+			</li>									
 			<li>
 				<a href="{% url 'dashboard:comments' %}">
 				<i class="fas fa-comments"></i>

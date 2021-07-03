@@ -24,24 +24,8 @@
     <!-- Start Header -->
     <header>
       <div class="container">
-        <div class="logo"><a href="{% url 'post:home' %}">{% translate 'blog' %}</a></div>
-
-        <div class="translation">
-          {% get_current_language as LANGUAGE_CODE %}
-          {% get_available_languages as LANGUAGES %}
-          {% get_language_info_list for LANGUAGES as languages %}
-          <ul>
-            {% for lan in languages %}
-              <li
-              {% if lan.code ==  LANGUAGE_CODE %}
-                class='cur-lan'
-              {% endif %}
-              >
-              <a href="/{{lan.code}}{{request.path|slice:'3:'}}">{{lan.name_local}}</a></li>
-            {% endfor %}
-          </ul>
-        </div>        
         <nav>
+        <div class="logo"><a href="{% url 'post:home' %}">{% translate 'blog' %}</a></div>
           <ul>
             {% if user.is_authenticated %}
               <li class='user'><a href="{% url 'profile' %}">{{user.username}}</a></li>
@@ -54,6 +38,19 @@
             {% endif %}
           </ul>
         </nav>
+          <div class="translation">
+          {% get_current_language as LANGUAGE_CODE %}
+          {% get_available_languages as LANGUAGES %}
+          {% get_language_info_list for LANGUAGES as languages %}
+          <ul>
+            {% for lan in languages %}
+              {% if lan.code !=  LANGUAGE_CODE %}
+                <li class='cur-lan' ><a href="/{{lan.code}}{{request.path|slice:'3:'}}">{{lan.name_local}}</a></li>
+                <i class="fas fa-language"></i>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div> 
       </div>
     </header>
     <!-- End Header -->

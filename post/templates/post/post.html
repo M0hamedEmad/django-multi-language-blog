@@ -6,12 +6,12 @@
 	<article>
   <div class="post-header">
 		<div class="header">
-			<h1>{{post.title}}</h1>
+			<h1>{{post.get_title}}</h1>
 			<p>{% blocktranslate with views=post.views_count %}{{views}} views {% endblocktranslate %}</p>
 		</div>
 		<ul>
 			<li class="category">
-				{% for category in post.categories.all %}  
+				{% for category in post.get_categories.all %}  
 					<a href="{% url 'post:home' %}?category={{category}}">{{category}}</a>
 				{% endfor %}
 			</li>
@@ -29,7 +29,7 @@
             	<img src="{{ post.image.url }}" alt="Image Post">
           {% endif %}
 	<p>
-		{{post.content}}
+		{{post.get_content}}
 	</p>
 </article>
 <div class="related-posts">
@@ -43,7 +43,7 @@
           			{% else %}
             			<img src="{% static 'image/default.jpg' %}" alt="Image Post">
           			{% endif %}
-					<h3>{{related_post.title}}</h3>
+					<h3>{{related_post.get_title}}</h3>
 				</a>
 			</article>
 		{% empty %}

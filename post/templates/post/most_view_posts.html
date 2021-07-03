@@ -10,7 +10,7 @@
             <img src="{% static 'image/default.jpg' %}" alt="Image Post">
         {% endif %}
 		<div class="article-content">
-		<h2>{{post.title}}</h2>
+		<h2>{{post.get_title}}</h2>
       <ul>
       <li class="date">
           <i class="far fa-calendar"></i>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-07-02 20:22+0200\n"
+"POT-Creation-Date: 2021-07-03 17:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,73 +19,82 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: .\post\models.py:18
-msgid "name"
-msgstr "الاسم"
-
-#: .\post\models.py:21
-msgid "category"
-msgstr "الفئة"
-
-#: .\post\models.py:22 .\post\models.py:36
-msgid "categories"
-msgstr "الفئات"
-
-#: .\post\models.py:29
+#: .\post\models.py:20
 msgid "Active"
 msgstr "نشط"
 
-#: .\post\models.py:30
+#: .\post\models.py:21
 msgid "Inactive"
 msgstr "غير نشط"
 
-#: .\post\models.py:33
-msgid "author"
-msgstr "كاتب"
+#: .\post\models.py:25 .\post\models.py:35
+msgid "name"
+msgstr "الاسم"
 
-#: .\post\models.py:34
-msgid "title"
-msgstr "عنوان"
+#: .\post\models.py:26
+msgid "code"
+msgstr ""
 
-#: .\post\models.py:35 .\post\models.py:77
-msgid "content"
-msgstr "محتوي"
-
-#: .\post\models.py:37
-msgid "image"
-msgstr "صورة"
-
-#: .\post\models.py:38 .\post\models.py:79
+#: .\post\models.py:27 .\post\models.py:50 .\post\models.py:135
 #, fuzzy
 #| msgid "related posts"
 msgid "created at"
 msgstr "مشاركات متشابهة"
 
-#: .\post\models.py:39 .\post\models.py:80
+#: .\post\models.py:28 .\post\models.py:51 .\post\models.py:136
 msgid "updated at"
 msgstr "تم التحديث في"
 
-#: .\post\models.py:40
+#: .\post\models.py:29 .\post\models.py:55 .\post\models.py:126
+#: .\post\models.py:137
+msgid "active"
+msgstr "نشط"
+
+#: .\post\models.py:38
+msgid "category"
+msgstr "الفئة"
+
+#: .\post\models.py:39 .\post\models.py:48 .\post\models.py:124
+msgid "categories"
+msgstr "الفئات"
+
+#: .\post\models.py:45
+msgid "author"
+msgstr "كاتب"
+
+#: .\post\models.py:46 .\post\models.py:122
+msgid "title"
+msgstr "عنوان"
+
+#: .\post\models.py:47 .\post\models.py:123 .\post\models.py:133
+msgid "content"
+msgstr "محتوي"
+
+#: .\post\models.py:49
+msgid "image"
+msgstr "صورة"
+
+#: .\post\models.py:52
 msgid "published at"
 msgstr "تم النشر في"
 
-#: .\post\models.py:41
+#: .\post\models.py:53
 #, fuzzy
 #| msgid "views"
 msgid "views count"
 msgstr "مرات المشاهدة"
 
-#: .\post\models.py:42 .\post\models.py:81
-msgid "active"
-msgstr "نشط"
+#: .\post\models.py:54 .\post\models.py:125
+msgid "language"
+msgstr ""
 
-#: .\post\models.py:76
-msgid "user"
-msgstr "مستخدم"
-
-#: .\post\models.py:78
+#: .\post\models.py:121 .\post\models.py:134
 msgid "post"
 msgstr "مشاركة"
+
+#: .\post\models.py:132
+msgid "user"
+msgstr "مستخدم"
 
 #: .\post\templates\post\comment_confirm_delete.html:4
 msgid "are you sure you want to delete comment"
@@ -146,3 +155,7 @@ msgid ""
 "you are not logged in, please<a href=\"%(login)s\">login</a> and leave a "
 "comment."
 msgstr "يجب عليك <a href=\"%(login)s\">تسجيل الدخول</a> لكتابة تعليق    "
+
+#: .\post\templates\post\posts.html:23
+msgid "There is no translation for this article"
+msgstr "لا يوجد ترجمة لهذة المقالة"

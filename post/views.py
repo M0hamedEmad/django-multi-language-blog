@@ -1,10 +1,11 @@
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, get_object_or_404
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils.timezone import now
 from django.db.models import Q
-from .models import Category, Post, Comment
+from django.utils.translation import get_language
+from .models import Category, Post, Comment, Language
 from .forms import CommentForm
 import random
 
@@ -57,24 +58,48 @@ class PostDetail(FormMixin, DetailView):
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
         return queryset
     
+    # def get_object(self):
+    
+    #     queryset = self.get_queryset()
+    #     slug = self.kwargs.get(self.slug_url_kwarg)
+    #     obj = get_object_or_404(queryset, slug=slug)
+        
+    #     try:
+    #         lang = Language.objects.filter(code=get_language()).get()
+    #     except:
+    #         return obj
+        
+    #     if lang == obj.language:
+    #         return obj
+    #     else:
+    #         l_post = obj.post_lang.filter(language=lang)
+    #         if l_post.exists():
+    #             obj = l_post.get()
+    #         return obj
+      
+    #     return obj
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        post = self.get_object()
+        # related posts 
         
         posts = self.get_queryset()
-        obj_categories = self.get_object().categories.all() # get object categories
+        obj_categories = post.categories.all() # get object categories
         
         related_posts = None 
         if obj_categories: # Are object has category
             related_posts = posts.filter(categories__in=obj_categories)[:3]
         
         # if related_posts none render 3 random posts
-        if related_posts is None:
+        if not related_posts:
             related_posts = random.sample(list(posts), 3)
         
         context['related_posts'] = related_posts
         
         # comments
-        comments = Comment.objects.filter( Q(post=self.get_object()) & Q(active=True) )
+        comments = Comment.objects.filter( Q(post=post) & Q(active=True) )
+                        
         context['comments'] = comments
         
         context['comment_form'] = CommentForm

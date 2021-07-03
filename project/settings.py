@@ -154,3 +154,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 LOCALE_PATHS = [
     BASE_DIR / 'locale',
 ]
+
+ALLOW_UNICODE_SLUGS = True
+

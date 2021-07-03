@@ -3,7 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.template.defaultfilters import slugify
+from django.utils.translation import get_language
 from PIL import Image
+from unidecode import unidecode
 
 def upload_image(instance, image_name):
     """ Make a path to the post image and change the name of the image to a post id
@@ -19,7 +21,16 @@ active_field_choices = [
     (False, _('Inactive'))
 ]
 
+class Language(models.Model):
+    name = models.CharField(_('name'), max_length=25, null=True, blank=True)
+    code = models.CharField(_('code'), max_length=5, null=True, blank=True)
+    created_at = models.DateTimeField(_('created at'), auto_now=True)
+    updated_at = models.DateTimeField(_('updated at'), auto_now_add=True)
+    active = models.BooleanField(_('active'), default=True, choices=active_field_choices)
 
+    def __str__(self):
+        return self.code
+    
 class Category(models.Model):
     name = models.CharField(_('name'), max_length=50)
     
@@ -40,11 +51,44 @@ class Post(models.Model):
     updated_at = models.DateTimeField(_('updated at'), auto_now_add=True)
     published_at = models.DateTimeField(_('published at'), default=now)
     views_count = models.IntegerField(_('views count'), null=True, blank=True, default=0, editable=False)
+    language = models.ForeignKey(Language, on_delete=models.PROTECT, related_name='posts', verbose_name=_('language'))
     active = models.BooleanField(_('active'), default=True, choices=active_field_choices)
-    slug = models.SlugField(null=True, blank=True, unique=True, max_length=100)
+    slug = models.SlugField(null=True, blank=True, unique=True, max_length=100, allow_unicode=True)
     
     class Meta:
         ordering = ('-published_at', )
+    
+    @property
+    def get_self_or_post_lang(self):
+        # check are language existin Language model
+        try:
+            lang = Language.objects.get(code=get_language())
+        except Language.DoesNotExist: # if not retrun default title
+            return self
+                    
+        if self.language == lang:
+            return self
+        
+        post_lang = self.post_lang.filter(language = lang)
+        
+        if post_lang:
+            return post_lang.get()
+        
+        return self
+        
+    def get_title(self):
+        return self.get_self_or_post_lang.title
+    
+    def get_content(self):
+        return self.get_self_or_post_lang.content
+    
+    def get_categories(self):
+        return self.get_self_or_post_lang.categories
+    
+    def get_language_code(self):
+        return self.get_self_or_post_lang.language.code
+            
+        
     
     def __str__(self):
         return self.title
@@ -62,7 +106,7 @@ class Post(models.Model):
             self.image = post_image
 
         # Make a post Slug
-        self.slug = slugify(f"{self.title}-{self.id}")
+        self.slug = slugify(unidecode(f"{self.title}-{self.id}"))
             
         super().save(*args, **kwargs)
         
@@ -73,8 +117,17 @@ class Post(models.Model):
                 img.thumbnail( (800, 800) )
                 img.save(self.image.path)
  
+class PostLanguage(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_lang', verbose_name=_('post'))
+    title = models.CharField(_('title'), max_length=100)
+    content = models.TextField(_('content'), max_length=4000)
+    categories = models.ManyToManyField(Category, blank=True, verbose_name=_('categories'))
+    language = models.ForeignKey(Language, on_delete=models.PROTECT, related_name='posts_lan', verbose_name=_('language'))
+    active = models.BooleanField(_('active'), default=True, choices=active_field_choices)
 
-
+    def __str__(self):
+        return self.title
+    
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name=_('user'))
     content = models.TextField(_('content'), max_length=300)

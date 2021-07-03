@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 {% block content %}
 <div class="articles">
@@ -12,12 +13,18 @@
             <img src="{% static 'image/default.jpg' %}" alt="Image Post">
           {% endif %}
         </a>
-    </div>
-    <div class="article-content">
-      <h2><a href="{% url 'post:post' post.slug %}">{{post.title}}</a></h2>
-      <ul>
+      </div>
+      <div class="article-content">
+        <h2><a href="{% url 'post:post' post.slug %}">
+          {{post.get_title}}
+        </a></h2>
+        {% get_current_language as LANGUAGE_CODE %}
+        {% if post.get_language_code != LANGUAGE_CODE %}
+          <p class="no-translate">{% translate 'There is no translation for this article' %}</p>
+        {% endif %}
+        <ul>
       <li class="category">
-        {% for category in post.categories.all %}  
+        {% for category in post.get_categories.all %}  
           <a href="?category={{category}}">{{category}}</a>
         {% endfor %}
       </li>
@@ -27,7 +34,7 @@
       </li>
       </ul>
       <p>
-        {{post.content|truncatewords:"30"}}
+        {{post.get_content|truncatewords:"30"}}
       </p>
     </div>
   </article>

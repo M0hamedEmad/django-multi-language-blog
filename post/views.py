@@ -1,21 +1,19 @@
-from django.shortcuts import redirect, reverse, get_object_or_404
+import random
+from django.shortcuts import reverse
 from django.views.generic import ListView, DetailView, DeleteView
 from django.views.generic.edit import FormMixin
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.utils.timezone import now
 from django.db.models import Q
-from django.utils.translation import get_language
-from .models import Category, Post, Comment, Language
-from .forms import CommentForm
-import random
-
+from post.models import Post, Comment
+from post.forms import CommentForm
 
 class PostList(ListView):
+    """ Home page """
     model = Post
     template_name = 'post/posts.html'
     context_object_name = 'posts'
     paginate_by = 10
-    
     def get_queryset(self):
         # render posts that active = true and published_at before now
         queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
@@ -23,15 +21,16 @@ class PostList(ListView):
         # filter posts by categories => if url path has a ?category=
         category = self.request.GET.get('category')
         
+        
         if category:
             queryset = queryset.filter(categories__name=category)
             
         # Search Field
-        q = self.request.GET.get('q')
+        qs = self.request.GET.get('q')
         
-        if q:
-            q = q.strip()
-            queryset = queryset.filter( Q(title__icontains=q) | Q(content__icontains=q) )
+        if qs:
+            qs = qs.strip()
+            queryset = queryset.filter( Q(title__icontains=qs) | Q(content__icontains=qs) )
             
         return queryset
     
@@ -86,14 +85,12 @@ class PostDetail(FormMixin, DetailView):
         return context
     
     
-    
     def post(self, request, *args, **kwargs):
         self.obj = self.get_object()
         form = self.get_form()
         if form.is_valid():
             return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
+        return self.form_invalid(form)
         
     def form_valid(self, form):
         form_2 = form.save(commit=False)

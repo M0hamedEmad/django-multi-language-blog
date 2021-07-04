@@ -27,6 +27,8 @@ app_name = 'dashboard'
 
 urlpatterns = [
     # Post Urls
+    path('dashboard/', PostListView.as_view(), name='dashboard'),
+    
     path('posts/', PostListView.as_view(), name='posts'),
     path('post/create/', PostCreateView.as_view(), name='post_create'),
     path('post/update/<slug:slug>/', PostUpdateView.as_view(), name='post_update'),

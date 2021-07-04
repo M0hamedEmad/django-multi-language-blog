@@ -20,7 +20,7 @@ python manage.py runserver # run the server
  python manage.py createsuperuser
  ```
  then write a username, email, password 
- go to http://127.0.0.1:8000/admin ### a django admin
- or http://127.0.0.1:8000/dashboard ### a dashboard for admin and editors
+ go to http://127.0.0.1:8000/admin  a django admin
+ or http://127.0.0.1:8000/dashboard  a dashboard for admin and editors
  
 

@@ -14,7 +14,8 @@ def upload_image(instance, image_name):
         [str]: [image path]
     """
     _ , extension = image_name.split('.')
-    return f"post_images/{instance.id}.{extension}"   
+    # return f"post_images/{instance.id}.{extension}"   
+    return f"post_images/{instance.title}.{extension}"   
 
 active_field_choices = [
     (True, _('Active')),
@@ -51,7 +52,7 @@ class Post(models.Model):
     updated_at = models.DateTimeField(_('updated at'), auto_now_add=True)
     published_at = models.DateTimeField(_('published at'), default=now)
     views_count = models.IntegerField(_('views count'), null=True, blank=True, default=0, editable=False)
-    language = models.ForeignKey(Language, on_delete=models.PROTECT, related_name='posts', verbose_name=_('language'))
+    language = models.ForeignKey(Language, on_delete=models.PROTECT, related_name='posts', verbose_name=_('language'), null=True, blank=True)
     active = models.BooleanField(_('active'), default=True, choices=active_field_choices)
     slug = models.SlugField(null=True, blank=True, unique=True, max_length=100, allow_unicode=True)
     
@@ -98,16 +99,24 @@ class Post(models.Model):
             Overwrite save mehtod to make a slug to post, rename a image and resize a big image
         """
 
-        # Handle problem in upload_image function  (pk not generator yet)
-        if self.pk is None:
-            post_image = self.image
-            self.image = None
-            super().save(*args, **kwargs)
-            self.image = post_image
-
         # Make a post Slug
-        self.slug = slugify(unidecode(f"{self.title}-{self.id}"))
+        if not self.pk:
+            slug = slugify(unidecode(f"{self.title}"))
+
+            slug_count = len(Post.objects.filter(slug=slug))
+            if slug_count > 0:
+                slug = f"{slug}-{slug_count}"
+
+            self.slug = slug
             
+
+        # Handle problem in upload_image function  (pk not generator yet)
+        # if self.pk is None:
+        #     post_image = self.image
+        #     self.image = None
+        #     super().save(*args, **kwargs)
+        #     self.image = post_image
+
         super().save(*args, **kwargs)
         
         # image resize

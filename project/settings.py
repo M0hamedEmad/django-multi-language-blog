@@ -39,6 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # Third part package
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'coreapi', # Coreapi for coreapi documentation
+    'drf_yasg', # drf_yasg fro Swagger documentation
     # Blog Apps
     'post.apps.PostConfig',
     'account.apps.AccountConfig',
@@ -157,3 +162,20 @@ LOCALE_PATHS = [
 
 ALLOW_UNICODE_SLUGS = True
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema'
+}
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'api_key': {
+            'type': 'apiKey',
+            'in': 'header',
+            'name': 'Authorization'
+        }
+    },
+}

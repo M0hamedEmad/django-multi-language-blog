@@ -1,0 +1,444 @@
+/* Start Variables */
+:root {
+  --secondary-color: #333;
+}
+/* End Variables */
+/* Start Global Rules */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: "Work Sans", "sans-serif";
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+a {
+	text-decoration: none;
+	color: Black;
+}
+ul {
+	list-style: none
+}
+input.special {
+    height: 27px;
+    background: transparent;
+    outline: none;
+    border: 2px solid #616161;
+    padding: 16px;
+}
+.messages {
+    width: 100%;
+
+	color: white;
+}	
+.messages .success {
+	background: #388e3c;
+    padding: 15px;	
+}
+.messages .warning {
+	background: #ffc107;
+    padding: 15px;		
+}
+.messages .danger, .errorlist li {
+	background: #dc3545;
+    padding: 15px;	
+}
+/* End Global Rulles */
+/* Start Components */
+.btn, btn-sm {
+	cursor: pointer;
+	display: inline-block;
+	white-space: nowrap;
+	text-align: center;
+	max-height: 40px;
+	outline: none;
+	border: none;
+	margin-top: 5px;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+.btn {
+	padding: 13px 18px;
+}
+.btn-sm {
+	padding: 6px 8px;
+}
+.danger {
+	background: #dc3545;
+	color: white;	
+}
+.info {
+	background: #007bff;
+	color: white;
+}
+.warning {
+	background: #ffc107;
+	color: white;
+}
+form.special {
+	background-color: white;
+	padding: 20px;
+	position: relative;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+form.special .form_p {
+	padding: 0px 0px 20px;
+}
+form.special .form_p:after {
+	content: "";
+	height: 1px;
+	width: 100%;
+	position: absolute;
+	left: 0;
+	background: #9e9e9e;
+	top: 46px;
+}
+form.special span.helptext {
+    display: none;
+}
+form.special label {
+	display: block;
+    margin-bottom: 4px;
+    color: #333;
+}
+form.special input[type='text'],
+form.special input[type='password'],
+form.special input[type='email'] {
+	width: 100%;
+	height: 45px;
+	border:1px solid #33333354;
+	outline: none;
+	margin-bottom: 10px;
+	padding: 15px;
+	transition: .6s;
+	-webkit-transition: .6s;
+	-moz-transition: .6s;
+	-ms-transition: .6s;
+	-o-transition: .6s;
+}
+form.special input[type='text']:hover,
+form.special input[type='password']:hover,
+form.special input[type='email']:hover {
+	background: #f5f5f5;
+}
+form.special input[type='text']:focus,
+form.special input[type='password']:focus,
+form.special input[type='email']:focus {
+	border: 2px solid #888;
+	background: #f5f5f5;
+}
+form.special select {
+    width: 100%;
+    padding: 12px;
+    min-height: 100px;
+    display: block;
+    font-size: 17px;
+    color: #333;
+    overflow: auto;
+    text-align: center;
+    background: #f5f5f5;
+}
+form.special select option {
+	cursor: pointer;
+    border-bottom: 1px solid #939393;
+    padding: 10px;
+}
+form.special select option:hover {
+	background: #ddd;
+}
+form.special select option:focus {
+	background: #ddd;
+}
+form.special input[type='file'] {
+	display: none;
+}
+label[for="id_picture"]{
+    padding: 5px 12px;
+    border: 2px solid #03a9f4;
+    width: fit-content;
+    cursor: pointer;
+}
+label[for="id_picture"]:hover {
+	background: #0d47a112;
+}
+/* End Components */
+/* Start Nav */
+nav {
+	position: fixed;
+	height: 100%;
+	width: 250px;
+	box-shadow: 1 black;
+	box-shadow: 0 0px 39px -14px #0000004f;
+}
+nav .logo {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+nav .logo h1 {
+	font-size: 25px;
+	font-weight: 500;
+	color: var(--secondary-color);
+}
+
+nav li {
+	position: relative;
+	border-bottom: 1px solid #d2d2d2;
+}
+nav li a {
+	display: block;
+	padding: 18px;
+}
+nav li.active
+{
+	background-color: #d1d1d114;
+	border: 1px solid #d2d2d2;
+	border-left-color: #2196f3;
+	border-left-width: 4px;
+}
+nav li:hover {
+	background-color: #d1d1d114;
+}
+nav li i {
+  color: #616161;
+}
+nav li.active i,
+nav li:hover  i,
+nav li:hover p
+{
+	color: #2196f3;
+}
+nav li p {
+	color: #616161;
+	margin-left: 5px;
+	font-size: 16px;
+	display: inline-block;
+}
+nav li.active p {
+	color: #2196f3
+}
+/* End Nav */
+.main-content {
+	margin-left: 250px;
+}
+/* Start Header */
+header {
+	display: flex;
+	height: 60px;
+}
+header form.search {
+  	flex-basis: 85%;
+}
+header form.search input {
+	height: 100%;
+	width: 100%;
+	outline: none;
+	padding: 20px;
+	border: none;
+}
+header .notification {
+	padding: 0px 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-left: 1px solid #dfdfdf;
+	border-right: 1px solid #dfdfdf;
+	width: 50px;
+	height: 100%;
+}
+header .notification i {
+  font-size: 25px;
+}
+header .profile {
+	display: flex;
+	margin-left: 15px;
+	align-items: center;
+}
+header .profile .image {
+	width: 35px;
+	height: 35px;
+	overflow: hidden;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-ms-border-radius: 50%;
+	-o-border-radius: 50%;
+}
+header .profile .image img {
+	display: block;
+	height: 100%;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+header .profile p {
+	font-size: 14px;
+	color: #777;
+	margin-left: 20px;
+	position: relative;
+}
+header .profile::after {
+	content: '';
+	border: 4px solid;
+	border-color: #888 transparent transparent transparent;
+	margin: 5px 6px 0px;
+}
+/* End Header */
+/* Start Content */
+.content {
+	background-color: #e0e0e0;
+	width: 100%;
+	min-height: 100vh;
+	padding: 40px 20px;
+	position: relative;
+}
+.content .content-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.content .content-header legend {
+	font-size: 45px;
+	margin-bottom: 20px;
+	color: var(--secondary-color);
+	font-weight: 500;
+}
+.content .table {
+	max-height: 3000px;
+	overflow-y	: auto;
+}
+.content table {
+	width: 100%;
+	min-width: 850px;
+	border-collapse: collapse;
+	border-radius: 10px;
+	box-shadow: 0 0 40px 0 rgb(0 0 0 / 15%);
+	background-color: white;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-ms-border-radius: 10px;
+	-o-border-radius: 10px;
+}
+.content table th {
+	font-size: 18px;
+	color: #fff;
+	line-height: 1.4;
+	background-color: #6c7ae0;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	font-weight: 500;
+}
+.content table td {
+	font-size: 15px;
+	color: gray;
+	line-height: 1.4;
+	padding: 20px 8px;
+	text-align: center;
+}
+tr:nth-child(even) {background-color: #f8f6ff;}
+
+/* End Content */
+/* Start Profile  */
+.profile-content {
+	display: flex;
+	justify-content: space-between;
+	gap: 20px;
+}
+@media (max-width:992px) {
+	.profile-content {
+		flex-wrap: wrap;
+	}
+}
+.profile-content .card {
+    background: white;
+    flex-basis: 35%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    padding: 24px;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+@media (max-width:992px) {
+	.profile-content .card {
+		flex-basis: 70%;
+		margin: 0px auto;
+	}
+}
+.card__name {
+  margin-top: 10px;
+  font-size: 1.3em;
+}
+.card__image {
+  height: 160px;
+  width: 160px;
+  border-radius: 50%;
+  margin-top: 20px;
+}
+.profile-content .form {
+	flex-basis: 75%;
+}
+.stat {
+    padding: 23px 0;
+    border-top: 1px solid #d1d1d1;
+    border-bottom: 1px solid #d1d1d1;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+@media (max-width:992px) {
+	.profile-content .form {
+		flex-basis: 100%;
+	}
+}
+/* End Profile  */
+
+

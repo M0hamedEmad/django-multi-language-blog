@@ -6,11 +6,10 @@ from .models import Profile
 
 
 @receiver(pre_save, sender=User)
-def check_email(sender, instance, created,**kwargs):
+def check_email(sender, instance,**kwargs):
     email = instance.email  
-    if created:
-        if sender.objects.filter(email=email).exclude(username=instance.username).exists():
-            raise ValidationError('Email Already Exists')
+    if sender.objects.filter(email=email).exclude(username=instance.username).exists():
+        raise ValidationError('Email Already Exists')
 
     
 

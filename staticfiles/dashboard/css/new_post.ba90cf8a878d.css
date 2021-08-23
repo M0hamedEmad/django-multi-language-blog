@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    margin-top: 10px;
+}
+body {
+    font-family: 'sans-serif';
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #00000024;
+}
+header li {
+    display: inline-block;
+    padding: 1px 20px;
+}
+header h2 {
+    margin: 0;
+    padding: 6px 20px 0px;
+    display: block;
+    font-weight: normal;
+    font-size: 20px;
+}
+form.post-form .body {
+    display: flex;
+    flex-wrap: wrap;
+}
+form.post-form .content {
+    flex: 1;
+    background: #f1f1f1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media (max-width: 776px) {
+    form.post-form .content {
+        flex-basis: 100%;
+    }
+    form.post-form .body {
+        flex-direction: column-reverse;
+    }
+}
+form.post-form input[type='text'] {
+    display: block;
+    flex: 1;    
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid black;
+    margin-bottom: 15px;
+    outline: none;
+    width: 75%;
+}
+form.post-form textarea {
+    width: 75%;
+    min-height: 85vh;
+    padding: 15px;
+    border: 1px solid #ddd;
+    outline: none;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+@media (max-width: 992px) {
+    form.post-form textarea,
+    form.post-form input[type='text'] {
+        width: 100%;
+    }    
+}
+form.post-form .col {
+    flex-basis: 15%;
+    padding-left: 9px;    
+}
+form.post-form  .col label {
+    display: block;
+    padding: 5px 0px;
+    font-size: 18px;
+    margin-top: 10px;
+    color: #bdbdbd;
+}
+form.post-form  .col input {
+    margin-bottom: 15px;
+}
+.select2-container {
+    width: 96% !important;
+}
+input[type='submit']{
+    display: block;
+    padding: 5px 21px;
+    outline: none;
+    background: #03a9f4;
+    color: white;
+    border: 2px solid transparent;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 85%;    
+}

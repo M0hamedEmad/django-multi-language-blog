@@ -54,34 +54,34 @@ class PostDetail(FormMixin, DetailView):
             
     def get_queryset(self):
         # render posts that active = true and published_at before now
-        queryset = self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
-        return queryset
+        return self.model.objects.filter( Q(active=True) & Q(published_at__lte=now()) )
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         post = self.get_object()
         # related posts 
-        
+
         posts = self.get_queryset()
         obj_categories = post.categories.all() # get object categories
-        
-        related_posts = None 
+
+        related_posts = None
         if obj_categories: # Are object has category
             related_posts = posts.filter(categories__in=obj_categories)[:3]
-        
+
         # if related_posts none render 3 random posts
         if not related_posts:
-            related_posts = random.sample(list(posts), 3)
-        
+            posts_list = list(posts)
+            related_posts = random.sample(posts_list, min(len(posts_list), 3))
+
         context['related_posts'] = related_posts
-        
+
         # comments
         comments = Comment.objects.filter( Q(post=post) & Q(active=True) )
-                        
+
         context['comments'] = comments
-        
+
         context['comment_form'] = CommentForm
-        
+
         return context
     
     

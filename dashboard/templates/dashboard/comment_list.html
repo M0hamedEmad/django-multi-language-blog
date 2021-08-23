@@ -20,7 +20,7 @@
       <tr>
         <td>{{comment.user}}</td>
         <td>{{comment.content|truncatewords:"6"}}</td>
-        <td><a href="{% url 'post:post' comment.post.slug %}">{{comment.post|truncatewords:"10"}}</a></td>
+        <td><a href="{% url 'post:post' 'test-2222222-dd' %}">{{comment.post|truncatewords:"10"}}</a></td>
         <td>{{comment.created_at|date:'d M Y h:i'}}</td>
         <td><a href="{% url 'post:delete_comment' comment.id %}" class="btn btn-sm danger">{% trans 'delete' %}</a></td>
       </tr>

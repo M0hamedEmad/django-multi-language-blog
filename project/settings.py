@@ -1,6 +1,9 @@
 from pathlib import Path
 from decouple import config
+import django_heroku
 from django.utils.translation import gettext_lazy as _
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -168,3 +171,5 @@ SWAGGER_SETTINGS = {
         }
     },
 }
+
+django_heroku.settings(locals())

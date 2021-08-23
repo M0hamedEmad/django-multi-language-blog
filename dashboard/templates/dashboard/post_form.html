@@ -37,9 +37,9 @@
 					<label for="id_categories">{{form.categories.label}}</label>
 					{{form.categories}}
 					<a href="{% url 'dashboard:create_category' %}">{% trans 'add new category' %}</a>
+					<label for="id_published_at">{{form.published_at.label}}</label>		
+					{{form.published_at}}
 					{% if 'create' in request.path %}			
-						<label for="id_published_at">{{form.published_at.label}}</label>		
-						{{form.published_at}}
 						<label for="id_image">{{form.image.label}}</label>					
 						{{form.image}}
 					{% endif %}						

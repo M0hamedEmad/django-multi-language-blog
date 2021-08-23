@@ -123,11 +123,14 @@ class Post(models.Model):
         
         # image resize
         if self.image:
-            img = Image.open(self.image.path)   
-            if img.width > 800 or img.height > 800:
-                img.thumbnail( (800, 800) )
-                img.save(self.image.path)
- 
+            try:
+                img = Image.open(self.image.path)   
+                if img.width > 800 or img.height > 800:
+                    img.thumbnail( (800, 800) )
+                    img.save(self.image.path)
+            except:
+                pass
+
 class PostLanguage(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post_lang', verbose_name=_('post'))
     title = models.CharField(_('title'), max_length=100)

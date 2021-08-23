@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import User
@@ -13,7 +14,8 @@ def upload_image(instance, image_name):
     Returns:
         [str]: [image path]
     """
-    _ , extension = image_name.split('.')
+    _ , extension = os.path.splitext(image_name)
+
     # return f"post_images/{instance.id}.{extension}"   
     return f"post_images/{instance.title}.{extension}"   
 

@@ -170,4 +170,4 @@ SWAGGER_SETTINGS = {
     },
 }
 
-django_heroku.settings(local())
+django_heroku.settings(locals())

@@ -1,6 +1,21 @@
 # DjangoBlog
 An application to manage a multilingual blog inside your Django website with Arabic and English languages
 
+# Demo
+## https://multilanguageblog.herokuapp.com/
+ 
+# editor account
+ ### https://multilanguageblog.herokuapp.com/en/login/
+* username = demo
+* password = demodemo123
+
+### home page
+![home page](https://user-images.githubusercontent.com/75542426/130702708-fde73a82-d410-45ee-868a-3879110dc236.png)
+
+### author dashboard
+![author dashboard](https://user-images.githubusercontent.com/75542426/130702746-178ec75f-c0d2-4861-95bc-ba1216fa1139.png)
+
+
 # Usage
 It's best to install Python projects in a Virtual Environment. Once you have set up a Virtual Environment, clone this project
  ```

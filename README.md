@@ -1,14 +1,6 @@
 # DjangoBlog
 An application to manage a multilingual blog inside your Django website with Arabic and English languages
 
-# Demo
-## https://multilanguageblog.herokuapp.com/
- 
-# editor account
- ### https://multilanguageblog.herokuapp.com/en/login/
-* username = demo
-* password = demodemo123
-
 ### home page
 ![home page](https://user-images.githubusercontent.com/75542426/130702708-fde73a82-d410-45ee-868a-3879110dc236.png)
 
